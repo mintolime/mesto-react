@@ -1,13 +1,53 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@import url('./vendor/normalize.css');
+@import url('./vendor/fonts/fonts.css');
+@import url('./blocks/root/root.css');
+@import url('./blocks/root/root__container/root__container.css');
+@import url('./blocks/main/main.css');
+@import url('./blocks/header/header.css');
+@import url('./blocks/header/__logo/header__logo.css');
+/* PROFILE */
+@import url('./blocks/profile/profile.css');
+@import url('./blocks/profile/__photo/profile__photo.css');
+@import url('./blocks/profile/__content/profile__content.css');
+@import url('./blocks/profile/__info/profile__info.css');
+@import url('./blocks/profile/__name/profile__name.css');
+/* CARDS */
+@import url('./blocks/cards/__title/cards__title.css');
+@import url('./blocks/cards/__list/cards__list.css');
+@import url('./blocks/cards/__item/cards__item.css');
+@import url('./blocks/cards/__inner/cards__inner.css');
+@import url('./blocks/cards/__image/cards__image.css');
+@import url('./blocks/cards/__likes/cards__likes_items.css');
+@import url('./blocks/cards/__likes/cards__likes_score.css');
+/*FOOTER*/
+@import url('./blocks/footer/footer.css');
+@import url('./blocks/footer/__copyright/footer__copyright.css');
+/* POPUP */
+@import url('./blocks/popup/popup.css');
+@import url('./blocks/popup/__title/popup__title.css');
+@import url('./blocks/popup/_opened/popup_opened.css');
+@import url('./blocks/popup/__container/popup__container.css');
+@import url('./blocks/popup/__container/_image/popup__container_image.css');
+/*FORM*/
+@import url('./blocks/form/form.css');
+@import url('./blocks/form/__input/form__input.css');
+@import url('./blocks/form/__input/form__input-error.css');
+@import url('./blocks/form/__inner/form__inner.css');
+/*FIGURE*/
+@import url('./blocks/figure/figure.css');
+@import url('./blocks/figure/__image/figure__image.css');
+@import url('./blocks/figure/__info/figure__info.css');
+/*BUTTONS*/
+@import url('./blocks/button/button.css');
+@import url('./blocks/button/_type/button_type_add.css');
+@import url('./blocks/button/_type/button_type_edit.css');
+@import url('./blocks/button/_type/button_type_like.css');
+@import url('./blocks/button/_type/button_type_like_active.css');
+@import url('./blocks/button/_type/button_type_close.css');
+@import url('./blocks/button/_type/button_type_save.css');
+@import url('./blocks/button/_type/button_type_delete.css');
+@import url('./blocks/button/_type/button_type_disable.css');
+@import url('./blocks/button/_type/button_type_delete_inactive.css');
+@import url('./blocks/button/_type/button_type_avatar-edit.css');
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/* @import url('./blocks'); шаблон*/
