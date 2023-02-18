@@ -1,5 +1,5 @@
 import "./index.css"
-import {useState} from "react"
+import { useState } from "react"
 import Header from "./components/Header.js"
 import Footer from "./components/Footer.js"
 import Main from "./components/Main.js"
@@ -12,21 +12,23 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
 
-  // const fix = () => {
-  //   console.log('work')
-  // }
 
-  const handleEditAvatarClick = () => {
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen)
+  const fix = () => {
+    console.log('work')
   }
 
-  const handleEditProfileClick = () => {
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
+  const closeAllPopups = () => {
+    setIsEditAvatarPopupOpen(false)
+    setIsEditProfilePopupOpen(false)
+    setIsAddPlacePopupOpen(false)
+    fix()
   }
 
-  const handleAddPlaceClick = () => {
-    setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
-  }
+  const handleEditAvatarClick = () => { setIsEditAvatarPopupOpen(true) }
+
+  const handleEditProfileClick = () => { setIsEditProfilePopupOpen(true) }
+
+  const handleAddPlaceClick = () => { setIsAddPlacePopupOpen(true) }
 
   return (
     <>
@@ -41,6 +43,7 @@ function App() {
         title="Редактировать профиль"
         name="edit-profile"
         isOpen={isEditProfilePopupOpen ? true : ""}
+        onClose={closeAllPopups}
       >
         <fieldset className="form__inner">
           <input
@@ -74,6 +77,7 @@ function App() {
         title="Новое место"
         name="add-card"
         isOpen={isAddPlacePopupOpen ? true : ""}
+        onClose={closeAllPopups}
       >
         <fieldset className="form__inner">
           <input
@@ -105,6 +109,7 @@ function App() {
         title="Обновить аватар"
         name="avatar"
         isOpen={isEditAvatarPopupOpen ? true : ""}
+        onClose={closeAllPopups}
       >
         <fieldset className="form__inner">
           <input

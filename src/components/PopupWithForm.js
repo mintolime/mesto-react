@@ -1,6 +1,5 @@
 
-function PopupWithForm({ name, title, children, isOpen }) {
-
+function PopupWithForm({ name, title, children, isOpen, onClose }) {
   return (
     < >
       <section className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`} aria-label="обновление аватара">
@@ -10,7 +9,7 @@ function PopupWithForm({ name, title, children, isOpen }) {
             {children}
             <button className="button button_type_save button_type_save-avatar" type="submit">Сохранить</button>
           </form>
-          <button type="button" className=" button button_type_close"></button>
+          <button type="button" className=" button button_type_close" onClick={onClose}></button>
         </div>
       </section>
 
