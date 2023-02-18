@@ -12,7 +12,6 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
 
-
   // const fix = () => {
   //   console.log('work')
   // }
@@ -128,7 +127,7 @@ function App() {
 
       <PopupWithForm title="Вы уверены?" name="confirm" btnText ='Да'></PopupWithForm>
       <ImagePopup />
-      <Card />
+      {/* <Card /> */}
     </>
   )
 }

@@ -1,22 +1,28 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { apiData } from "../utils/api/api"
+import Card from "./Card"
 
 function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
   const [userName, setuserName] = useState('')
   const [userDescription, setuserDescription] = useState('')
   const [userAvatar, setuserAvatar] = useState('')
-  //  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState([])
 
-  apiData.getAllData()
-  .then(([initialCards, userData]) => {
-    console.log(initialCards)
-    console.log(userData)
-    setuserName(userData.name)
-    setuserDescription(userData.about)
-    setuserAvatar(userData.avatar)
-    // setCards(initialCards)
-  })
-  .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
+
+  useEffect(() => {
+    apiData.getAllData()
+      .then(([initialCards, userData]) => {
+        // console.log(initialCards)
+        // console.log(userData)
+        setuserName(userData.name)
+        setuserDescription(userData.about)
+        setuserAvatar(userData.avatar)
+        setCards(initialCards)
+        // console.log(cards)
+      })
+      .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
+  }, [])
+
 
   return (
     <main className="main root__container">
@@ -34,10 +40,9 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
 
       <section className="cards" aria-label="галерея пользователя">
         <ul className="cards__list">
-        {/* {cards} */}
+          <Card card={cards} />
         </ul>
       </section>
-
     </main>
   )
 }
