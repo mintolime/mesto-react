@@ -1,4 +1,4 @@
-function Card() {
+function Card({cards}) {
   return (
     <template id="card-template">
         <li className="cards__item">

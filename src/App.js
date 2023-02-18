@@ -13,15 +13,14 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
 
 
-  const fix = () => {
-    console.log('work')
-  }
+  // const fix = () => {
+  //   console.log('work')
+  // }
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
-    fix()
   }
 
   const handleEditAvatarClick = () => { setIsEditAvatarPopupOpen(true) }
@@ -44,6 +43,7 @@ function App() {
         name="edit-profile"
         isOpen={isEditProfilePopupOpen ? true : ""}
         onClose={closeAllPopups}
+        btnText ='Сохранить'
       >
         <fieldset className="form__inner">
           <input
@@ -78,6 +78,7 @@ function App() {
         name="add-card"
         isOpen={isAddPlacePopupOpen ? true : ""}
         onClose={closeAllPopups}
+        btnText ='Сохранить'
       >
         <fieldset className="form__inner">
           <input
@@ -110,6 +111,7 @@ function App() {
         name="avatar"
         isOpen={isEditAvatarPopupOpen ? true : ""}
         onClose={closeAllPopups}
+        btnText ='Сохранить'
       >
         <fieldset className="form__inner">
           <input
@@ -124,7 +126,7 @@ function App() {
         </fieldset>
       </PopupWithForm>
 
-      <PopupWithForm title="Вы уверены?" name="confirm"></PopupWithForm>
+      <PopupWithForm title="Вы уверены?" name="confirm" btnText ='Да'></PopupWithForm>
       <ImagePopup />
       <Card />
     </>
