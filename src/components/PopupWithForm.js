@@ -1,7 +1,7 @@
 function PopupWithForm({ name, title, children }) {
   return (
     < >
-      <section className={`popup popup_type_${name}`} aria-label="обновление аватара">
+      <section className="popup popup_type_{name}" aria-label="обновление аватара">
         <div className="popup__container">
           <h3 className="popup__title">{title}`</h3>
           <form name={name} className="form" noValidate>

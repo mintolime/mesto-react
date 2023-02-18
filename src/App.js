@@ -9,20 +9,6 @@ import Card from './components/Card';
 
 function App({ isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpen }) {
 
-  //   function handlePopupOpen() {
-
-  //   popup.classList.add('popup_opened')
-  // }
-
-  // function handleAddPlaceClick() {
-  //   const popup = document.querySelector('.popup_add-card')
-  //   popup.classList.add('popup_opened')
-  // }
-
-  // function handleEditAvatarClick() {
-  //   const popup = document.querySelector('.popup_avatar')
-  //   popup.classList.add('popup_opened')
-  // }
   return (
     < >
 
@@ -40,15 +26,15 @@ function App({ isEditProfilePopupOpen, isAddPlacePopupOpen, isEditAvatarPopupOpe
         </fieldset>
       </PopupWithForm>
 
-      <PopupWithForm title="Новое место<" name="add-card"  >
-       <fieldset className="form__inner">
-              <input className="form__input  form__input_text_name" name="nameCard" type="text" id="input-name-card"
-                aria-label="Наименование" placeholder="Название" minLength="2" maxLength="30" required />
-              <span className='form__input-error input-name-card-error'></span>
-              <input className="form__input form__input_text_about" name="linkCard" type="url" id="input-link"
-                aria-label="подпись" placeholder="Ссылка на картинку" required />
-              <span className='form__input-error input-link-error'></span>
-            </fieldset>
+      <PopupWithForm title="Новое место" name="add-card"  >
+        <fieldset className="form__inner">
+          <input className="form__input  form__input_text_name" name="nameCard" type="text" id="input-name-card"
+            aria-label="Наименование" placeholder="Название" minLength="2" maxLength="30" required />
+          <span className='form__input-error input-name-card-error'></span>
+          <input className="form__input form__input_text_about" name="linkCard" type="url" id="input-link"
+            aria-label="подпись" placeholder="Ссылка на картинку" required />
+          <span className='form__input-error input-link-error'></span>
+        </fieldset>
       </PopupWithForm>
 
       <PopupWithForm title="Обновить аватар" name="avatar" >
