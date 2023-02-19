@@ -8,7 +8,6 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace,onCardClick }) {
   const [userAvatar, setuserAvatar] = useState('')
   const [cards, setCards] = useState([])
 
-
   useEffect(() => {
     apiData.getAllData()
       .then(([initialCards, userData]) => {
@@ -19,7 +18,6 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace,onCardClick }) {
       })
       .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
   }, [])
-
 
   return (
     <main className="main root__container">
@@ -40,9 +38,9 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace,onCardClick }) {
           <Card card={cards} onCardClick={onCardClick}/>
         </ul>
       </section>
+      
     </main>
   )
 }
-
 
 export default Main;

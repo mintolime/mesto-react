@@ -1,14 +1,11 @@
-function ImagePopup({card,onClose}) {
-  //массив передается
-  console.log(card)
-
+function ImagePopup({card,onClose,isOpen}) {
   return (
     < >
-      <section className={`popup popup_image ${card ? 'popup_opened' : ''}`} aria-label="фотографии карточек">
+      <section className={`popup popup_image  ${isOpen ? 'popup_opened' : ''}`} aria-label="фотографии карточек">
         <div className="popup__container popup__container_image ">
           <figure className="figure">
-            <img className="figure__image" src="#" alt="#" />
-            <figcaption className="figure__info"></figcaption>
+            <img className="figure__image" src={card.link} alt="test" />
+            <figcaption className="figure__info">{card.name}</figcaption>
           </figure>
           <button type="button" className=" button button_type_close" onClick={onClose}></button>
         </div>
@@ -16,6 +13,5 @@ function ImagePopup({card,onClose}) {
     </>
     )
 }
-
 
 export default ImagePopup;

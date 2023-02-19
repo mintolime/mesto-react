@@ -1,8 +1,8 @@
 import "./index.css"
 import { useState } from "react"
-import Header from "./components/Header.js"
-import Footer from "./components/Footer.js"
-import Main from "./components/Main.js"
+import Header from "./components/Header"
+import Footer from "./components/Footer"
+import Main from "./components/Main"
 import PopupWithForm from "./components/PopupWithForm"
 import ImagePopup from "./components/ImagePopup"
 
@@ -10,20 +10,21 @@ function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
-  const [selectedCard,setSelectedCard] = useState(null)
-  // const fix = () => {
-  //   console.log('work')
-  // }
+  const [isImagePopupOpen, setImagePopupOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState({});
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
-    setSelectedCard(null)
+    setImagePopupOpen(false);
+    setSelectedCard({})
   }
 
-  const handleCardClick = (data) => {
-    setSelectedCard(data) }
+  const handleCardClick = (card) => {
+    setSelectedCard(card)
+    setImagePopupOpen(true)
+  }
 
   const handleEditAvatarClick = () => { setIsEditAvatarPopupOpen(true) }
 
@@ -38,16 +39,14 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
-        onCardClick = {handleCardClick}
-      />
+        onCardClick={handleCardClick} />
       <Footer />
       <PopupWithForm
         title="Редактировать профиль"
         name="edit-profile"
-        isOpen={isEditProfilePopupOpen ? true : ""}
+        isOpen={isEditProfilePopupOpen}
         onClose={closeAllPopups}
-        btnText ='Сохранить'
-      >
+        btnText="Сохранить">
         <fieldset className="form__inner">
           <input
             className="form__input  form__input_text_name "
@@ -58,8 +57,7 @@ function App() {
             placeholder="Ваше имя"
             minLength="2"
             maxLength="40"
-            required
-          />
+            required />
           <span className="form__input-error input-name-error"></span>
           <input
             className="form__input form__input_text_about"
@@ -70,8 +68,7 @@ function App() {
             placeholder="О себе"
             minLength="2"
             maxLength="200"
-            required
-          />
+            required />
           <span className="form__input-error input-about-error"></span>
         </fieldset>
       </PopupWithForm>
@@ -79,10 +76,9 @@ function App() {
       <PopupWithForm
         title="Новое место"
         name="add-card"
-        isOpen={isAddPlacePopupOpen ? true : ""}
+        isOpen={isAddPlacePopupOpen}
         onClose={closeAllPopups}
-        btnText ='Сохранить'
-      >
+        btnText="Сохранить">
         <fieldset className="form__inner">
           <input
             className="form__input  form__input_text_name"
@@ -93,8 +89,7 @@ function App() {
             placeholder="Название"
             minLength="2"
             maxLength="30"
-            required
-          />
+            required />
           <span className="form__input-error input-name-card-error"></span>
           <input
             className="form__input form__input_text_about"
@@ -103,8 +98,7 @@ function App() {
             id="input-link"
             aria-label="подпись"
             placeholder="Ссылка на картинку"
-            required
-          />
+            required />
           <span className="form__input-error input-link-error"></span>
         </fieldset>
       </PopupWithForm>
@@ -112,10 +106,9 @@ function App() {
       <PopupWithForm
         title="Обновить аватар"
         name="avatar"
-        isOpen={isEditAvatarPopupOpen ? true : ""}
+        isOpen={isEditAvatarPopupOpen}
         onClose={closeAllPopups}
-        btnText ='Сохранить'
-      >
+        btnText="Сохранить">
         <fieldset className="form__inner">
           <input
             className="form__input"
@@ -123,14 +116,20 @@ function App() {
             type="url"
             id="input-avatar"
             aria-label="подпись"
-            required
-          />
+            required />
           <span className="form__input-error input-avatar-error"></span>
         </fieldset>
       </PopupWithForm>
 
-      <PopupWithForm title="Вы уверены?" name="confirm" btnText ='Да'></PopupWithForm>
-      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      <PopupWithForm
+        title="Вы уверены?"
+        name="confirm"
+        btnText="Да"
+      ></PopupWithForm>
+      <ImagePopup
+        card={selectedCard}
+        onClose={closeAllPopups}
+        isOpen={isImagePopupOpen} />
     </>
   )
 }
