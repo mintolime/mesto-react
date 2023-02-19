@@ -1,5 +1,4 @@
 import logo from '../images/header-logo.svg';
-// import './index.css';
 
 function Header() {
   return (
@@ -9,6 +8,5 @@ function Header() {
       </header>
     </>)
 }
-
 
 export default Header;

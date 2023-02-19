@@ -1,5 +1,4 @@
 function Card({ card, onCardClick}) {
-
   return (
     < >
       {card.map((data) => (
