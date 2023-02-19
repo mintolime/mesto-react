@@ -1,11 +1,9 @@
-function Card({ card }) {
-  //массив приходит, нужно настроить отображение
-  console.log(card)
+function Card({ card ,onCardClick}) {
   return (
     < >
       {card.map((data) => (
         <li className="cards__item" key={data._id}>
-          <img className="cards__image" src={data.link} alt={data.name} />
+          <img className="cards__image" src={data.link} alt={data.name}   onClick={()=>onCardClick(card)}/>
           <div className="cards__inner">
             <h2 className="cards__title">{data.name}</h2>
             <div className="cards__likes_items">

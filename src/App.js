@@ -5,13 +5,12 @@ import Footer from "./components/Footer.js"
 import Main from "./components/Main.js"
 import PopupWithForm from "./components/PopupWithForm"
 import ImagePopup from "./components/ImagePopup"
-import Card from "./components/Card"
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false)
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false)
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false)
-
+  const [selectedCard,setSelectedCard] = useState(null)
   // const fix = () => {
   //   console.log('work')
   // }
@@ -20,7 +19,11 @@ function App() {
     setIsEditAvatarPopupOpen(false)
     setIsEditProfilePopupOpen(false)
     setIsAddPlacePopupOpen(false)
+    setSelectedCard(null)
   }
+
+  const handleCardClick = (data) => {
+    setSelectedCard(data) }
 
   const handleEditAvatarClick = () => { setIsEditAvatarPopupOpen(true) }
 
@@ -35,6 +38,7 @@ function App() {
         onEditProfile={handleEditProfileClick}
         onAddPlace={handleAddPlaceClick}
         onEditAvatar={handleEditAvatarClick}
+        onCardClick = {handleCardClick}
       />
       <Footer />
       <PopupWithForm
@@ -126,8 +130,7 @@ function App() {
       </PopupWithForm>
 
       <PopupWithForm title="Вы уверены?" name="confirm" btnText ='Да'></PopupWithForm>
-      <ImagePopup />
-      {/* <Card /> */}
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} />
     </>
   )
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { apiData } from "../utils/api/api"
 import Card from "./Card"
 
-function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
+function Main({ onEditAvatar, onEditProfile, onAddPlace,onCardClick }) {
   const [userName, setuserName] = useState('')
   const [userDescription, setuserDescription] = useState('')
   const [userAvatar, setuserAvatar] = useState('')
@@ -12,13 +12,10 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
   useEffect(() => {
     apiData.getAllData()
       .then(([initialCards, userData]) => {
-        // console.log(initialCards)
-        // console.log(userData)
         setuserName(userData.name)
         setuserDescription(userData.about)
         setuserAvatar(userData.avatar)
         setCards(initialCards)
-        // console.log(cards)
       })
       .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
   }, [])
@@ -40,7 +37,7 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace }) {
 
       <section className="cards" aria-label="галерея пользователя">
         <ul className="cards__list">
-          <Card card={cards} />
+          <Card card={cards} onCardClick={onCardClick}/>
         </ul>
       </section>
     </main>
