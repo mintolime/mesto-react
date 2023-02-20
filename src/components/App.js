@@ -1,3 +1,4 @@
+//Спасибо за ревью. В нашей 58-й группе делятся хорошими впечатлениями после проверки работ. Все хотела к вам на ревью попасть :) 
 import "../index.css"
 import { useState } from "react"
 import Header from "./Header"
