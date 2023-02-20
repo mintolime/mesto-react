@@ -13,7 +13,6 @@
       headers: this.headers
     })
       .then((res) => this._handleResponce(res))
-      .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
   }
 
   createCards(data) {
@@ -26,7 +25,6 @@
       }),
     })
       .then((res) => this._handleResponce(res))
-      .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
   }
 
   getUserData() {
@@ -34,7 +32,6 @@
       headers: this.headers,
     })
       .then((res) => this._handleResponce(res))
-      .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
   }
 
   updateUserInfo(data) {
@@ -47,7 +44,6 @@
       })
     })
       .then((res) => this._handleResponce(res))
-      .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
   };
 
   changeAvatar(data) {
@@ -57,7 +53,6 @@
       headers: this.headers,
     })
       .then((res) => this._handleResponce(res))
-      .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
   }
 
   deleteCard(cardId) {
@@ -66,7 +61,6 @@
       headers: this.headers,
     })
       .then((res) => this._handleResponce(res))
-      .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
   }
 
   addLike(cardId) {
@@ -75,7 +69,6 @@
       headers: this.headers,
     })
       .then((res) => this._handleResponce(res))
-      .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
   }
 
   deleteLike(cardId) {
@@ -84,7 +77,6 @@
       headers: this.headers,
     })
       .then((res) => this._handleResponce(res))
-      .catch(err => console.log(`Ошибка: что-то пошло не так: ${err}`))
   }
 
   _handleResponce(res) {
