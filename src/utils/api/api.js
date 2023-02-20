@@ -85,7 +85,6 @@
     }
     return Promise.reject(res.status);
   }
-
 }
 
 export const apiData = new Api({
