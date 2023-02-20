@@ -34,9 +34,12 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace,onCardClick }) {
       </section>
 
       <section className="cards" aria-label="галерея пользователя">
-        <ul className="cards__list">
-          <Card card={cards} onCardClick={onCardClick}/>
-        </ul>
+      <ul className="cards__list">
+       {cards.map((card) => (
+          <Card card={card} key={card._id}  onCardClick={onCardClick}/>
+          ))}
+      </ul>
+       
       </section>
       
     </main>
