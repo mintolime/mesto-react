@@ -1,18 +1,30 @@
-//Спасибо за ревью. В нашей 58-й группе делятся хорошими впечатлениями после проверки работ. Все хотела к вам на ревью попасть :)
+import React from 'react';
+
 import '../index.css';
-import { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import { apiData } from '../utils/api/api';
+import { CurrentUserContext } from '../context/CurrentUserContext';
 
 function App() {
-  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(false);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(false);
-  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = useState(false);
-  const [isImagePopupOpen, setImagePopupOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState({});
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
+  const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState({});
+  const [currentUser, setcurrentUser] = React.useState({});
+
+  React.useEffect(() => {
+    apiData
+      .getUserData()
+      .then((data) => {
+        setcurrentUser(data);
+      })
+      .catch((err) => console.log(`Ошибка: что-то пошло не так: ${err}`));
+  }, []);
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -42,12 +54,15 @@ function App() {
   return (
     <>
       <Header />
-      <Main
-        onEditProfile={handleEditProfileClick}
-        onAddPlace={handleAddPlaceClick}
-        onEditAvatar={handleEditAvatarClick}
-        onCardClick={handleCardClick}
-      />
+      <CurrentUserContext.Provider value={currentUser}>
+        {/* Поддерево, в котором будут доступны оба контекста */}
+        <Main
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+          onCardClick={handleCardClick}
+        />
+      </CurrentUserContext.Provider>
       <Footer />
       <PopupWithForm
         title="Редактировать профиль"

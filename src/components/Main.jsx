@@ -1,20 +1,17 @@
-import { useEffect, useState } from 'react';
+import React from 'react';
 import { apiData } from '../utils/api/api';
 import Card from './Card';
+import { CurrentUserContext } from '../context/CurrentUserContext';
 
 function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
-  const [userName, setuserName] = useState('');
-  const [userDescription, setuserDescription] = useState('');
-  const [userAvatar, setuserAvatar] = useState('');
-  const [cards, setCards] = useState([]);
+  const [cards, setCards] = React.useState([]);
 
-  useEffect(() => {
+  const currentUser = React.useContext(CurrentUserContext);
+
+  React.useEffect(() => {
     apiData
       .getAllData()
-      .then(([initialCards, userData]) => {
-        setuserName(userData.name);
-        setuserDescription(userData.about);
-        setuserAvatar(userData.avatar);
+      .then(([initialCards]) => {
         setCards(initialCards);
       })
       .catch((err) => console.log(`Ошибка: что-то пошло не так: ${err}`));
@@ -23,12 +20,12 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
   return (
     <main className="main root__container">
       <section className="profile">
-        <img className="profile__photo" src={userAvatar} alt="фото профиля" />
+        <img className="profile__photo" src={currentUser.avatar} alt="фото профиля" />
         <button className="button button_type_avatar-edit" onClick={onEditAvatar}></button>
         <div className="profile__content">
-          <h1 className="profile__name">{userName}</h1>
+          <h1 className="profile__name">{currentUser.name}</h1>
           <button className="button button_type_edit" onClick={onEditProfile}></button>
-          <p className="profile__info">{userDescription}</p>
+          <p className="profile__info">{currentUser.about}</p>
         </div>
         <button className="button button_type_add" type="button" onClick={onAddPlace}></button>
       </section>
