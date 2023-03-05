@@ -16,16 +16,28 @@ function App() {
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setcurrentUser] = React.useState({});
+
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
     apiData
-      .getUserData()
-      .then((data) => {
-        setcurrentUser(data);
+      .getAllData()
+      .then(([initialCards,userData]) => {
+        setCards(initialCards);
+        setcurrentUser(userData);
+        console.log(initialCards);
       })
       .catch((err) => console.log(`Ошибка: что-то пошло не так: ${err}`));
   }, []);
+
+  // React.useEffect(() => {
+  //   apiData
+  //     .getUserData()
+  //     .then((data) => {
+  //       setcurrentUser(data);
+  //     })
+  //     .catch((err) => console.log(`Ошибка: что-то пошло не так: ${err}`));
+  // }, []);
 
   const fix = () => {
     console.log('work');

@@ -4,6 +4,7 @@ import Card from './Card';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
 function Main({
+  cards,
   onEditAvatar,
   onEditProfile,
   onAddPlace,
@@ -11,19 +12,10 @@ function Main({
   onCardDeleteClick,
   onCardLikeClick,
 }) {
-  const [cards, setCards] = React.useState([]);
+  
 
   const currentUser = React.useContext(CurrentUserContext);
 
-  React.useEffect(() => {
-    apiData
-      .getAllData()
-      .then(([initialCards]) => {
-        setCards(initialCards);
-        console.log(initialCards);
-      })
-      .catch((err) => console.log(`Ошибка: что-то пошло не так: ${err}`));
-  }, []);
 
   return (
     <main className="main root__container">
