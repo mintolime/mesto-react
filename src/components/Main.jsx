@@ -3,19 +3,19 @@ import { apiData } from '../utils/api/api';
 import Card from './Card';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
-function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
-  const [cards, setCards] = React.useState([]);
+function Main({
+  cards,
+  onEditAvatar,
+  onEditProfile,
+  onAddPlace,
+  onCardClick,
+  onCardDeleteClick,
+  onCardLikeClick,
+}) {
+  
 
   const currentUser = React.useContext(CurrentUserContext);
 
-  React.useEffect(() => {
-    apiData
-      .getAllData()
-      .then(([initialCards]) => {
-        setCards(initialCards);
-      })
-      .catch((err) => console.log(`Ошибка: что-то пошло не так: ${err}`));
-  }, []);
 
   return (
     <main className="main root__container">
@@ -33,7 +33,13 @@ function Main({ onEditAvatar, onEditProfile, onAddPlace, onCardClick }) {
       <section className="cards" aria-label="галерея пользователя">
         <ul className="cards__list">
           {cards.map((card) => (
-            <Card card={card} key={card._id} onCardClick={onCardClick} />
+            <Card
+              card={card}
+              key={card._id}
+              onCardClick={onCardClick}
+              onCardLikeClick={onCardLikeClick}
+              onCardDeleteClick={onCardDeleteClick}
+            />
           ))}
         </ul>
       </section>
