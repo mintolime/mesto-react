@@ -6,10 +6,13 @@ import Footer from './Footer';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
+import Loading from './Loading';
 import { apiData } from '../utils/api/api';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
 function App() {
+  const [isLoadingActive, setIsLoadingActive] = React.useState(true);
+  const [isErrorMessage, setIsErrorMessage] = React.useState('');
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -20,14 +23,18 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   React.useEffect(() => {
+    setIsLoadingActive(true);
     apiData
       .getAllData()
-      .then(([initialCards,userData]) => {
+      .then(([initialCards, userData]) => {
         setCards(initialCards);
         setcurrentUser(userData);
-        console.log(initialCards);
+        setIsLoadingActive(false);
+        // console.log(initialCards);
       })
-      .catch((err) => console.log(`Ошибка: что-то пошло не так: ${err}`));
+      .catch((err) => {
+      setIsErrorMessage(`Что-то пошло не так: ошибка запроса ${err}  😔`)
+      console.log(err)});
   }, []);
 
   // const fix = () => {
@@ -59,15 +66,15 @@ function App() {
     setIsAddPlacePopupOpen(true);
   };
 
-//нужно проверить работает ли без перезагрузки 
-  function handleDeleteClick(card) {
+  //нужно проверить работает ли без перезагрузки !!
+  const handleDeleteClick = (card) => {
     // // Отправляем запрос в API и получаем обновлённые данные карточки
-    apiData.deleteCard(card._id).then(() => { 
-      setCards((state) => state.filter((item) => (item._id === card._id)));
+    apiData.deleteCard(card._id).then(() => {
+      setCards((state) => state.filter((item) => item._id === card._id));
     });
-  }
+  };
 
-//лайки работают 
+  //лайки работают
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
     // // Отправляем запрос в API и получаем обновлённые данные карточки
@@ -80,16 +87,19 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Header />
-        <Main
-          cards={cards}
-          onEditProfile={handleEditProfileClick}
-          onAddPlace={handleAddPlaceClick}
-          onEditAvatar={handleEditAvatarClick}
-          onCardClick={handleCardClick}
-          onCardDeleteClick={handleDeleteClick}
-          onCardLikeClick={handleCardLike}
-        />
-
+        {isLoadingActive ? (
+          <Loading error={isErrorMessage} />
+        ) : (
+          <Main
+            cards={cards}
+            onEditProfile={handleEditProfileClick}
+            onAddPlace={handleAddPlaceClick}
+            onEditAvatar={handleEditAvatarClick}
+            onCardClick={handleCardClick}
+            onCardDeleteClick={handleDeleteClick}
+            onCardLikeClick={handleCardLike}
+          />
+        )}
         <Footer />
         <PopupWithForm
           title="Редактировать профиль"
