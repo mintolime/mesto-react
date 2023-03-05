@@ -1,5 +1,4 @@
 import React from 'react';
-import { apiData } from '../utils/api/api';
 import Card from './Card';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
@@ -12,10 +11,7 @@ function Main({
   onCardDeleteClick,
   onCardLikeClick,
 }) {
-  
-
   const currentUser = React.useContext(CurrentUserContext);
-
 
   return (
     <main className="main root__container">

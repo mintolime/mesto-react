@@ -56,12 +56,12 @@ class Api {
       headers: this.headers,
     }).then((res) => this._handleResponce(res));
   }
-  
+
   changeLikeCardStatus(id, isLiked) {
-    if (isLiked) {
-      return this.deleteLike(id);
-    } else {
+    if (!isLiked) {
       return this.addLike(id);
+    } else {
+      return this.deleteLike(id);
     }
   }
 

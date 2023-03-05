@@ -30,18 +30,9 @@ function App() {
       .catch((err) => console.log(`Ошибка: что-то пошло не так: ${err}`));
   }, []);
 
-  // React.useEffect(() => {
-  //   apiData
-  //     .getUserData()
-  //     .then((data) => {
-  //       setcurrentUser(data);
-  //     })
-  //     .catch((err) => console.log(`Ошибка: что-то пошло не так: ${err}`));
-  // }, []);
-
-  const fix = () => {
-    console.log('work');
-  };
+  // const fix = () => {
+  //   console.log('work');
+  // };
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -78,16 +69,11 @@ function App() {
     });
   }
 
+//лайки работают 
   const handleCardLike = (card) => {
-    fix();
-    // setCards(card);
-    //объект приходит
-    // console.log(card);
-    // // Снова проверяем, есть ли уже лайк на этой карточке
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-
     // // Отправляем запрос в API и получаем обновлённые данные карточки
-    apiData.changeLikeCardStatus(card._id, !isLiked).then((newCard) => {
+    apiData.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
       setCards((state) => state.map((data) => (data._id === card._id ? newCard : data)));
     });
   };
