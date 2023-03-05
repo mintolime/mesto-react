@@ -1,7 +1,7 @@
 import React from 'react';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
-function Card({ card, onCardClick, onCardDeleteClick,onCardLikeClick}) {
+function Card({ card, onCardClick, onCardDeleteClick, onCardLikeClick }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const isOwn = card.owner._id === currentUser._id;
@@ -9,9 +9,7 @@ function Card({ card, onCardClick, onCardDeleteClick,onCardLikeClick}) {
   const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
   // Создаём переменную, которую после зададим в `className` для кнопки лайка
-  const cardLikeButtonClassName = (
-    `button button_type_like ${isLiked && 'button_type_like_active'}`
-  );
+  const cardLikeButtonClassName = `button button_type_like ${isLiked && 'button_type_like_active'}`;
 
   return (
     <>
@@ -27,11 +25,14 @@ function Card({ card, onCardClick, onCardDeleteClick,onCardLikeClick}) {
           <div className="cards__likes_items">
             <button
               className={cardLikeButtonClassName}
-              type="button" onClick={() => onCardLikeClick(card)}></button>
-            <span className="cards__likes_score">{card.likes.length}</span>
+              type="button"
+              onClick={() => onCardLikeClick(card)}></button>
+            <span className="cards__likes_score">
+              {card.likes.length < 1 ? '' : card.likes.length}
+            </span>
           </div>
         </div>
-        {isOwn && <button className="button button_type_delete" onClick={onCardDeleteClick} />}
+        {isOwn && <button className="button button_type_delete" onClick={() => onCardDeleteClick(card)} />}
       </li>
     </>
   );

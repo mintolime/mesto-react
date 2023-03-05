@@ -33,8 +33,8 @@ function Main({
               card={card}
               key={card._id}
               onCardClick={onCardClick}
-              onCardLikeClick={onCardLikeClick}
               onCardDeleteClick={onCardDeleteClick}
+              onCardLikeClick={onCardLikeClick}
             />
           ))}
         </ul>

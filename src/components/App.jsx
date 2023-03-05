@@ -59,13 +59,11 @@ function App() {
     setIsAddPlacePopupOpen(true);
   };
 
+//нужно проверить работает ли без перезагрузки 
   function handleDeleteClick(card) {
-    console.log(card);
-
     // // Отправляем запрос в API и получаем обновлённые данные карточки
-    apiData.deleteCard(card._id).then((newCard) => {
-      console.log(newCard); //данные приходят
-      setCards((state) => state.map((c) => (c._id === card._id ? newCard : c)));
+    apiData.deleteCard(card._id).then(() => { 
+      setCards((state) => state.filter((item) => (item._id === card._id)));
     });
   }
 
