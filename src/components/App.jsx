@@ -5,6 +5,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
 import PopupWithForm from './PopupWithForm';
+import EditProfilePopup from './EditProfilePopup';
 import ImagePopup from './ImagePopup';
 import Loading from './Loading';
 import { apiData } from '../utils/api/api';
@@ -101,7 +102,8 @@ function App() {
           />
         )}
         <Footer />
-        <PopupWithForm
+        <EditProfilePopup  isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+        {/* <PopupWithForm
           title="Редактировать профиль"
           name="edit-profile"
           isOpen={isEditProfilePopupOpen}
@@ -133,7 +135,7 @@ function App() {
             />
             <span className="form__input-error input-about-error"></span>
           </fieldset>
-        </PopupWithForm>
+        </PopupWithForm> */}
 
         <PopupWithForm
           title="Новое место"

@@ -5,5 +5,4 @@ function Footer() {
     </footer>
   )
 }
-//отличный совет, спасибо! 
 export default Footer;

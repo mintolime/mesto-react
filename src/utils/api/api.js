@@ -9,7 +9,7 @@ class Api {
   }
 
   getAllCards() {
-    return fetch(`${this.url}/cardsч`, {
+    return fetch(`${this.url}/cards`, {
       headers: this.headers,
     }).then((res) => this._handleResponce(res));
   }
