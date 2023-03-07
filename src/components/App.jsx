@@ -21,7 +21,7 @@ function App() {
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
-  const [currentUser, setcurrentUser] = React.useState({});
+  const [currentUser, setCurrentUser] = React.useState({});
 
   const [cards, setCards] = React.useState([]);
 
@@ -31,9 +31,8 @@ function App() {
       .getAllData()
       .then(([initialCards, userData]) => {
         setCards(initialCards);
-        setcurrentUser(userData);
+        setCurrentUser(userData);
         setIsLoadingActive(false);
-        // console.log(initialCards);
       })
       .catch((err) => {
         setIsErrorMessage(`Что-то пошло не так: ошибка запроса ${err}  😔`);
@@ -41,9 +40,9 @@ function App() {
       });
   }, []);
 
-  // const fix = () => {
-  //   console.log('work');
-  // };
+  const fix = () => {
+    console.log('work');
+  };
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -71,46 +70,55 @@ function App() {
   };
 
   const handleUpdateUser = (data) => {
-    // console.log(data);
-    setIsLoadingActive(true);
+    console.log(data);
+    fix();
+    // setIsLoadingActive(true);
     apiData
       .updateUserInfo(data)
       .then((data) => {
-        console.log(data)
-        setcurrentUser(data);
+        console.log(data);
+        setCurrentUser(data);
         closeAllPopups();
         setIsLoadingActive(false);
       })
       .catch((err) => {
-        setIsErrorMessage(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoadingActive(false);
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
       });
   };
 
-  const handleAddPlaceSubmit = (data) => {
-    console.log(data);
-    setIsLoadingActive(true);
+  const handleAddPlaceSubmit = (newCard) => {
+    console.log(newCard);
     apiData
-      .createCards(data)
-      .then((res) => {
-        console.log(res);
+      .createCards(newCard)
+      .then((newCard) => {
+        fix();
+        setCards([newCard, ...cards]);
+        closeAllPopups();
+        console.log(newCard);
       })
       .catch((err) => {
-        setIsErrorMessage(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-        console.log(err);
-      })
-      .finally(() => {
-        setIsLoadingActive(false);
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
       });
   };
-  //нужно проверить работает ли без перезагрузки !!
+
+  const handleUpdateAvatar = (data) => {
+    console.log(data);
+    apiData
+      .changeAvatar(data)
+      .then((data) => {
+        setCurrentUser(data);
+        closeAllPopups();
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+      });
+  };
+
+  //работает
   const handleDeleteClick = (card) => {
     // // Отправляем запрос в API и получаем обновлённые данные карточки
     apiData.deleteCard(card._id).then(() => {
-      setCards((state) => state.filter((item) => item._id === card._id ? "" : item));
+      setCards((state) => state.filter((item) => (item._id === card._id ? '' : item)));
     });
   };
 
@@ -146,7 +154,11 @@ function App() {
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
-        <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar}
+        />
         <AddPlacePopup
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
