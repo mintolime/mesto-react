@@ -2,29 +2,38 @@ import React from 'react';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 import PopupWithForm from './PopupWithForm';
 
-function EditProfilePopup({ isOpen, onClose, onSubmit, onUpdateUser }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
-  //  const [value, setValue] = React.useState('');
+  //  const [value, setValue] = React.useState({});
+
+  //  console.log('value',value)
   // Подписка на контекст
   const currentUser = React.useContext(CurrentUserContext);
 
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
-    // console.log(currentUser)
     setName(currentUser.name);
     setDescription(currentUser.about);
-  }, [currentUser]);
+  }, [currentUser, isOpen]);
+
+  function handleChangeName(e) {
+    setName(e.target.value);
+     console.log(e.target.value)
+  }
+  function handleChangeDescription(e) {
+    setDescription(e.target.value);
+    console.log(e.target.value)
+  }
 
   function handleSubmit(e) {
-    setDescription(e.target.value);
     // Запрещаем браузеру переходить по адресу формы
     e.preventDefault();
 
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
-      name,
+      name: name,
       about: description,
     });
   }
@@ -35,11 +44,11 @@ function EditProfilePopup({ isOpen, onClose, onSubmit, onUpdateUser }) {
       name="edit-profile"
       isOpen={isOpen}
       onClose={onClose}
-      onSubmit={onSubmit}
+      onSubmit={handleSubmit}
       btnText="Сохранить">
       <fieldset className="form__inner">
         <input
-          onChange={handleSubmit}
+          onChange={handleChangeName}
           className="form__input  form__input_text_name "
           name="nameUser"
           value={name}
@@ -53,7 +62,7 @@ function EditProfilePopup({ isOpen, onClose, onSubmit, onUpdateUser }) {
         />
         <span className="form__input-error input-name-error"></span>
         <input
-          onChange={handleSubmit}
+          onChange={handleChangeDescription}
           className="form__input form__input_text_about"
           name="aboutUser"
           value={description}
