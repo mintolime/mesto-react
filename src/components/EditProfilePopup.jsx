@@ -2,29 +2,32 @@ import React from 'react';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 import PopupWithForm from './PopupWithForm';
 
-function EditProfilePopup({ isOpen, onClose, onChange }) {
+function EditProfilePopup({ isOpen, onClose, onSubmit, onUpdateUser }) {
   const [name, setName] = React.useState('');
   const [description, setDescription] = React.useState('');
+  //  const [value, setValue] = React.useState('');
   // Подписка на контекст
   const currentUser = React.useContext(CurrentUserContext);
 
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
+    // console.log(currentUser)
     setName(currentUser.name);
     setDescription(currentUser.about);
   }, [currentUser]);
 
-//   function handleSubmit(e) {
-//   // Запрещаем браузеру переходить по адресу формы
-//   e.preventDefault();
+  function handleSubmit(e) {
+    setDescription(e.target.value);
+    // Запрещаем браузеру переходить по адресу формы
+    e.preventDefault();
 
-//   // Передаём значения управляемых компонентов во внешний обработчик
-//   onUpdateUser({
-//     name,
-//     about: description,
-//   });
-// } 
+    // Передаём значения управляемых компонентов во внешний обработчик
+    onUpdateUser({
+      name,
+      about: description,
+    });
+  }
 
   return (
     <PopupWithForm
@@ -36,7 +39,7 @@ function EditProfilePopup({ isOpen, onClose, onChange }) {
       btnText="Сохранить">
       <fieldset className="form__inner">
         <input
-          onChange={onChange}
+          onChange={handleSubmit}
           className="form__input  form__input_text_name "
           name="nameUser"
           value={name}
@@ -50,7 +53,7 @@ function EditProfilePopup({ isOpen, onClose, onChange }) {
         />
         <span className="form__input-error input-name-error"></span>
         <input
-          onChange={onChange}
+          onChange={handleSubmit}
           className="form__input form__input_text_about"
           name="aboutUser"
           value={description}
