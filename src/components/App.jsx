@@ -122,17 +122,19 @@ function App() {
         {isLoadingActive ? (
           <Loading error={isErrorMessage} />
         ) : (
-          <Main
-            cards={cards}
-            onEditProfile={handleEditProfileClick}
-            onAddPlace={handleAddPlaceClick}
-            onEditAvatar={handleEditAvatarClick}
-            onCardClick={handleCardClick}
-            onCardDeleteClick={handleDeleteClick}
-            onCardLikeClick={handleCardLike}
-          />
+          <>
+            <Main
+              cards={cards}
+              onEditProfile={handleEditProfileClick}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onCardClick={handleCardClick}
+              onCardDeleteClick={handleDeleteClick}
+              onCardLikeClick={handleCardLike}
+            />
+            <Footer />
+          </>
         )}
-        <Footer />
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
