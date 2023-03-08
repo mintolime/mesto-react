@@ -103,16 +103,26 @@ function App() {
   };
 
   const handleDeleteClick = (card) => {
-    apiData.deleteCard(card._id).then(() => {
-      setCards((state) => state.filter((item) => (item._id === card._id ? '' : item)));
-    });
+    apiData
+      .deleteCard(card._id)
+      .then(() => {
+        setCards((state) => state.filter((item) => (item._id === card._id ? '' : item)));
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+      });
   };
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    apiData.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
-      setCards((state) => state.map((data) => (data._id === card._id ? newCard : data)));
-    });
+    apiData
+      .changeLikeCardStatus(card._id, isLiked)
+      .then((newCard) => {
+        setCards((state) => state.map((data) => (data._id === card._id ? newCard : data)));
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+      });
   };
 
   return (

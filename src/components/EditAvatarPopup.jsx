@@ -31,6 +31,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
           type="url"
           id="input-avatar"
           aria-label="подпись"
+          placeholder="Сcылка на аватар"
           ref={avatarLink}
           required
         />

@@ -1,6 +1,5 @@
 function ImagePopup({card,onClose,isOpen}) {
   return (
-    < >
       <section className={`popup popup_image  ${isOpen ? 'popup_opened' : ''}`} aria-label="фотографии карточек">
         <div className="popup__container popup__container_image ">
           <figure className="figure">
@@ -10,7 +9,6 @@ function ImagePopup({card,onClose,isOpen}) {
           <button type="button" className=" button button_type_close" onClick={onClose}></button>
         </div>
       </section>
-    </>
     )
 }
 
