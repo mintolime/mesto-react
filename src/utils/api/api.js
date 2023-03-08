@@ -53,24 +53,16 @@ class Api {
 
   changeLikeCardStatus(id, isLiked) {
     if (!isLiked) {
-      return this.addLike(id);
+      return fetch(`${this.url}/cards/${id}/likes`, {
+        method: 'PUT',
+        headers: this.headers,
+      }).then((res) => this._handleResponce(res));
     } else {
-      return this.deleteLike(id);
+      return fetch(`${this.url}/cards/${id}/likes`, {
+        method: 'DELETE',
+        headers: this.headers,
+      }).then((res) => this._handleResponce(res));
     }
-  }
-
-  addLike(cardId) {
-    return fetch(`${this.url}/cards/${cardId}/likes`, {
-      method: 'PUT',
-      headers: this.headers,
-    }).then((res) => this._handleResponce(res));
-  }
-
-  deleteLike(cardId) {
-    return fetch(`${this.url}/cards/${cardId}/likes`, {
-      method: 'DELETE',
-      headers: this.headers,
-    }).then((res) => this._handleResponce(res));
   }
 
   _handleResponce(res) {
