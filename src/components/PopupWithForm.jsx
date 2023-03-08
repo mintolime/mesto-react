@@ -6,7 +6,7 @@ function PopupWithForm({ name, title, children, btnText, isOpen, onClose, onSubm
         aria-label="обновление аватара">
         <div className="popup__container">
           <h3 className="popup__title">{title}</h3>
-          <form name={name} className="form" onSubmit={onSubmit} noValidate>
+          <form name={name} className="form" onSubmit={onSubmit}>
             {children}
             <button className="button button_type_save button_type_save-avatar" type="submit">
               {btnText}

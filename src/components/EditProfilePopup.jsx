@@ -45,7 +45,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           onChange={handleChangeName}
           className="form__input  form__input_text_name "
           name="nameUser"
-          value={name}
+          value={name || ''}
           type="text"
           id="input-name"
           aria-label="имя"
@@ -59,7 +59,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           onChange={handleChangeDescription}
           className="form__input form__input_text_about"
           name="aboutUser"
-          value={description}
+          value={description || ''}
           type="text"
           id="input-about"
           aria-label="подпись"
