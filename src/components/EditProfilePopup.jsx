@@ -16,12 +16,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
   function handleChangeName(e) {
     setName(e.target.value);
-    //импуты передаются
-    console.log(e.target.value);
   }
   function handleChangeDescription(e) {
     setDescription(e.target.value);
-    console.log(e.target.value);
   }
 
   function handleSubmit(e) {

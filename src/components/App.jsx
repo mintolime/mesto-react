@@ -40,10 +40,6 @@ function App() {
       });
   }, []);
 
-  const fix = () => {
-    console.log('work');
-  };
-
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -70,13 +66,9 @@ function App() {
   };
 
   const handleUpdateUser = (data) => {
-    console.log(data);
-    fix();
-    // setIsLoadingActive(true);
     apiData
       .updateUserInfo(data)
       .then((data) => {
-        console.log(data);
         setCurrentUser(data);
         closeAllPopups();
         setIsLoadingActive(false);
@@ -87,14 +79,11 @@ function App() {
   };
 
   const handleAddPlaceSubmit = (newCard) => {
-    console.log(newCard);
     apiData
       .createCards(newCard)
       .then((newCard) => {
-        fix();
         setCards([newCard, ...cards]);
         closeAllPopups();
-        console.log(newCard);
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
@@ -102,7 +91,6 @@ function App() {
   };
 
   const handleUpdateAvatar = (data) => {
-    console.log(data);
     apiData
       .changeAvatar(data)
       .then((data) => {
@@ -114,18 +102,14 @@ function App() {
       });
   };
 
-  //работает
   const handleDeleteClick = (card) => {
-    // // Отправляем запрос в API и получаем обновлённые данные карточки
     apiData.deleteCard(card._id).then(() => {
       setCards((state) => state.filter((item) => (item._id === card._id ? '' : item)));
     });
   };
 
-  //лайки работают
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((i) => i._id === currentUser._id);
-    // // Отправляем запрос в API и получаем обновлённые данные карточки
     apiData.changeLikeCardStatus(card._id, isLiked).then((newCard) => {
       setCards((state) => state.map((data) => (data._id === card._id ? newCard : data)));
     });
