@@ -10,6 +10,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import Loading from './Loading';
+import Login from './Login';
 import { apiData } from '../utils/api/api';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
@@ -137,8 +138,9 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header />
-        {isLoadingActive ? (
+        <Header btnHeaderText={'Войти'} />
+        <Login/>
+        {/* {isLoadingActive ? (
           <Loading error={isErrorMessage} />
         ) : (
           <>
@@ -175,7 +177,7 @@ function App() {
           isOpen={isDeleteCardPopupOpen}
           onDelete={handleDeleteClick}
         />
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} />
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} /> */}
       </CurrentUserContext.Provider>
     </>
   );
