@@ -2,9 +2,7 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 
 function DeleteConfirmPopup({ card, isOpen, onClose,onDelete}) {
-
   function handleDelete(evt){
-    //карточка приходит, удаляется, но попап не закрывает
     evt.preventDefault();
     onDelete(card)
   }
