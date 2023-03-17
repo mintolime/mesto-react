@@ -140,8 +140,8 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Header btnHeaderText={'Войти'} />
-        {/* <Login/> */}
-        <Register/>
+        <Login/>
+        {/* <Register/> */}
         {/* {isLoadingActive ? (
           <Loading error={isErrorMessage} />
         ) : (

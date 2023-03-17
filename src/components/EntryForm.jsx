@@ -1,7 +1,8 @@
-
-function Entry({ title, btnText }) {
+import { Link } from "react-router-dom";
+// console.log('link', Link)
+function Entry({ title, btnText,linkText }) {
   return (
-    <section className="login" aria-label={title}>
+    <section className="login" aria-label={title}> 
       <div className="login__container">
         <h3 className="login__title">{title}</h3>
         <form name="form" className="form"> 
@@ -32,7 +33,10 @@ function Entry({ title, btnText }) {
           </button>
         </form>
       </div>
-      <p>cncncncc</p>
+      <a href="./" className="login__auth-link">{linkText}</a>
+     {/* <Link to="/" className="login__auth">
+        Уже зарегистрированы? Войти
+      </Link> */}
     </section>
   );
 }

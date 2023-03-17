@@ -89,6 +89,16 @@
   width: 360px;
 }
 
+.login__auth-link {
+  padding-top: 15px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+}
+
 .login__title {
   font-weight: 900;
   font-size: 24px;
