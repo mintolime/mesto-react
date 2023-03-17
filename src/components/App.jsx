@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 
 import '../index.css';
 import Header from './Header';
@@ -152,11 +152,28 @@ function App() {
             {' '}
             <Header btnHeaderText={'Войти'} />
             <Routes>
-              <Route path="/sign-up" element={<Register />} loggedIn={isLoggedIn} />
-              <Route path="/sign-in" element={<Login />} loggedIn={isLoggedIn} />
               <Route
                 path="/"
                 element={
+                  <ProtectedRoute
+                    component={Main}
+                    loggedIn={isLoggedIn}
+                    cards={cards}
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    onCardClick={handleCardClick}
+                    onCardDeleteClick={handleDeletePlaceClick}
+                    onCardLikeClick={handleCardLike}
+                  />
+                }
+              />
+              <Route path="/sign-up" element={<Register />} loggedIn={isLoggedIn} />
+              <Route path="/sign-in" element={<Login />} loggedIn={isLoggedIn} />
+
+              {/* <Route
+                path="/"
+                element={ 
                   <Main
                     // loggedIn={isLoggedIn}
                     cards={cards}
@@ -168,7 +185,7 @@ function App() {
                     onCardLikeClick={handleCardLike}
                   />
                 }
-              />
+              /> */}
             </Routes>
             <Footer />
           </>
