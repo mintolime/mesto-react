@@ -12,6 +12,7 @@ import ImagePopup from './ImagePopup';
 import Loading from './Loading';
 import Login from './Login';
 import Register from './Register';
+import InfoTooltip from './InfoTooltip';
 import { apiData } from '../utils/api/api';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
@@ -22,6 +23,7 @@ function App() {
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isDeleteCardPopupOpen, setIsDeleteCardPopupOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const [isImagePopupOpen, setImagePopupOpen] = React.useState(false);
   const [selectedCard, setSelectedCard] = React.useState({});
   const [currentUser, setCurrentUser] = React.useState({});
@@ -49,6 +51,7 @@ function App() {
     setIsAddPlacePopupOpen(false);
     setImagePopupOpen(false);
     setIsDeleteCardPopupOpen(false);
+    setIsInfoTooltipOpen(false);
     setSelectedCard({});
   };
 
@@ -140,7 +143,10 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Header btnHeaderText={'Войти'} />
-        <Login/>
+        <InfoTooltip 
+        // isOpen={isInfoTooltipOpen} onClose={closeAllPopups} 
+        isCorrectLogin={false}/>
+        {/* <Login/> */}
         {/* <Register/> */}
         {/* {isLoadingActive ? (
           <Loading error={isErrorMessage} />

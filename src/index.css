@@ -97,6 +97,11 @@
   text-align: center;
   text-decoration: none;
   color: #fff;
+  cursor: pointer;
+}
+
+.login__auth-link:hover {
+  opacity: .6;
 }
 
 .login__title {
@@ -117,4 +122,26 @@
 
 .form__inner_login {
   padding: 0 0 216px;
+}
+
+.popup__login-icon {
+  display: block;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+}
+
+.popup__container_login {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.popup__login-title {
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  text-align: center;
+  color: #000000;
+  padding: 32px 0 0;
+  margin: 0;
 }
