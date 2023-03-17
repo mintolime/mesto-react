@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
 import '../index.css';
 import Header from './Header';
@@ -14,9 +15,11 @@ import Login from './Login';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
 import { apiData } from '../utils/api/api';
+import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isLoadingActive, setIsLoadingActive] = React.useState(true);
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -142,25 +145,31 @@ function App() {
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
-        <Header btnHeaderText={'Войти'} />
-        <InfoTooltip 
-        // isOpen={isInfoTooltipOpen} onClose={closeAllPopups} 
-        isCorrectLogin={false}/>
-        {/* <Login/> */}
-        {/* <Register/> */}
-        {/* {isLoadingActive ? (
+        {isLoadingActive ? (
           <Loading error={isErrorMessage} />
         ) : (
           <>
-            <Main
-              cards={cards}
-              onEditProfile={handleEditProfileClick}
-              onAddPlace={handleAddPlaceClick}
-              onEditAvatar={handleEditAvatarClick}
-              onCardClick={handleCardClick}
-              onCardDeleteClick={handleDeletePlaceClick}
-              onCardLikeClick={handleCardLike}
-            />
+            {' '}
+            <Header btnHeaderText={'Войти'} />
+            <Routes>
+              <Route path="/sign-up" element={<Register />} loggedIn={isLoggedIn} />
+              <Route path="/sign-in" element={<Login />} loggedIn={isLoggedIn} />
+              <Route
+                path="/"
+                element={
+                  <Main
+                    // loggedIn={isLoggedIn}
+                    cards={cards}
+                    onEditProfile={handleEditProfileClick}
+                    onAddPlace={handleAddPlaceClick}
+                    onEditAvatar={handleEditAvatarClick}
+                    onCardClick={handleCardClick}
+                    onCardDeleteClick={handleDeletePlaceClick}
+                    onCardLikeClick={handleCardLike}
+                  />
+                }
+              />
+            </Routes>
             <Footer />
           </>
         )}
@@ -185,7 +194,8 @@ function App() {
           isOpen={isDeleteCardPopupOpen}
           onDelete={handleDeleteClick}
         />
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} /> */}
+        <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} />
+        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} isCorrectLogin={false} />
       </CurrentUserContext.Provider>
     </>
   );

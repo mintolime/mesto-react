@@ -4,9 +4,8 @@ import errorIcon from '../images/icon/icon-error-login.png';
 function InfoTooltip({ isOpen, onClose, isCorrectLogin }) {
   return (
     <section
-      className={`popup popup_opened 
-      `}
-      aria-label="обновление аватара">
+      className={`popup  ${isOpen ? 'popup_opened' : ''}`}
+      aria-label="Уведомление при входе в приложение">
       <div className="popup__container popup__container_login">
         <button type="button" className=" button button_type_close" onClick={onClose}></button>
         <img
