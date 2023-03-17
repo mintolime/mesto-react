@@ -1,9 +1,10 @@
+
 function Entry({ title, btnText }) {
   return (
     <section className="login" aria-label={title}>
       <div className="login__container">
         <h3 className="login__title">{title}</h3>
-        <form name="form" className="form">
+        <form name="form" className="form"> 
           <fieldset className="form__inner form__inner_login">
             <input
               className="form__input form__input_login"

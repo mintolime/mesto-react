@@ -11,6 +11,7 @@ import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import Loading from './Loading';
 import Login from './Login';
+import Register from './Register';
 import { apiData } from '../utils/api/api';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
@@ -139,7 +140,8 @@ function App() {
     <>
       <CurrentUserContext.Provider value={currentUser}>
         <Header btnHeaderText={'Войти'} />
-        <Login/>
+        {/* <Login/> */}
+        <Register/>
         {/* {isLoadingActive ? (
           <Loading error={isErrorMessage} />
         ) : (
