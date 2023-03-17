@@ -32,6 +32,7 @@ function Entry({ title, btnText }) {
           </button>
         </form>
       </div>
+      <p>cncncncc</p>
     </section>
   );
 }

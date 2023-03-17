@@ -82,11 +82,11 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 60px 0 80px;
 }
 
 .login__container {
   width: 360px;
-  padding: 60px 80px;
 }
 
 .login__title {
