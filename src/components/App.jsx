@@ -1,10 +1,11 @@
 import React from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 import '../index.css';
 import Header from './Header';
 import Footer from './Footer';
 import Main from './Main';
+
 import DeleteConfirmPopup from './DeleteConfirmPopup';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
@@ -14,6 +15,7 @@ import Loading from './Loading';
 import Login from './Login';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
+
 import { apiData } from '../utils/api/api';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../context/CurrentUserContext';
@@ -142,6 +144,7 @@ function App() {
       });
   };
 
+
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -168,8 +171,8 @@ function App() {
                   />
                 }
               />
-              <Route path="/sign-up" element={<Register />} loggedIn={isLoggedIn} />
-              <Route path="/sign-in" element={<Login />} loggedIn={isLoggedIn} />
+              <Route path="/signup" element={<Register />} loggedIn={isLoggedIn} />
+              <Route path="/signin" element={<Login />} loggedIn={isLoggedIn} />
 
               {/* <Route
                 path="/"
