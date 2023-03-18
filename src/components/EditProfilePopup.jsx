@@ -1,25 +1,32 @@
 import React from 'react';
 import { CurrentUserContext } from '../context/CurrentUserContext';
+import useFormAndValidation from '../hooks/useFormAndValidation';
 import PopupWithForm from './PopupWithForm';
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = React.useState('');
-  const [description, setDescription] = React.useState('');
 
+  const { values, handleChange, errors, isValid, setIsValid, setValues, resetForm } =
+    useFormAndValidation();
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
-    setName(currentUser.name);
-    setDescription(currentUser.about);
+    if (currentUser) {
+      setValues(currentUser);
+      setIsValid(true);
+    }
+
+    if (!isOpen) {
+      resetForm();
+    }
   }, [currentUser, isOpen]);
 
-  function handleChangeName(e) {
-    setName(e.target.value);
-  }
-  function handleChangeDescription(e) {
-    setDescription(e.target.value);
-  }
+  // function handleChangeName(e) {
+  //   setName(e.target.value);
+  // }
+  // function handleChangeDescription(e) {
+  //   setDescription(e.target.value);
+  // }
 
   function handleSubmit(e) {
     // Запрещаем браузеру переходить по адресу формы
@@ -27,8 +34,8 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
 
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
-      name: name,
-      about: description,
+      name: values.name,
+      about: values.about,
     });
   }
 
@@ -39,13 +46,14 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      btnText="Сохранить">
+      btnText="Сохранить"
+      isValid={isValid}>
       <fieldset className="form__inner">
         <input
-          onChange={handleChangeName}
+          onChange={handleChange}
           className="form__input  form__input_text_name "
-          name="nameUser"
-          value={name || ''}
+          name="name"
+          value={values.name || ''}
           type="text"
           id="input-name"
           aria-label="имя"
@@ -54,12 +62,12 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           maxLength="40"
           required
         />
-        <span className="form__input-error input-name-error"></span>
+        <span className="form__input-error input-name-error">{errors.name}</span>
         <input
-          onChange={handleChangeDescription}
-          className="form__input form__input_text_about"
-          name="aboutUser"
-          value={description || ''}
+          onChange={handleChange}
+          className="form__input form__input_text_about "
+          name="about"
+          value={values.about || ''}
           type="text"
           id="input-about"
           aria-label="подпись"
@@ -68,7 +76,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
           maxLength="200"
           required
         />
-        <span className="form__input-error input-about-error"></span>
+        <span className="form__input-error input-about-error">{errors.about}</span>
       </fieldset>
     </PopupWithForm>
   );
