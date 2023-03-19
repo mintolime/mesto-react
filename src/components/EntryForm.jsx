@@ -1,9 +1,8 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import * as auth from '../utils/api/auth';
 // console.log('link', Link)
-function Entry({ title, btnText, linkText }) {
+function Entry({ title, btnText, linkText,onSubmit }) {
   const [formValue, setFormValue] = React.useState({
     email: '',
     password: '',
@@ -22,7 +21,7 @@ function Entry({ title, btnText, linkText }) {
     <section className="login" aria-label={title}>
       <div className="login__container">
         <h3 className="login__title">{title}</h3>
-        <form name="form" className="form">
+        <form name="form" className="form" onSubmit={onSubmit}>
           <fieldset className="form__inner form__inner_login">
             <input
               className="form__input form__input_login"
@@ -49,7 +48,7 @@ function Entry({ title, btnText, linkText }) {
             />
             <span className="form__input-error input-link-error"></span>
           </fieldset>
-          <button className="button button_type_entry" type="submit" >
+          <button className="button button_type_entry" type="submit">
             {btnText}
           </button>
         </form>

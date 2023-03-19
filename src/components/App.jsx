@@ -17,11 +17,14 @@ import Register from './Register';
 import InfoTooltip from './InfoTooltip';
 
 import { apiData } from '../utils/api/api';
+import * as auth from '../utils/api/auth';
 import ProtectedRoute from './ProtectedRoute';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+   const [isRegistration, setIsRegistration] =
+    React.useState(false);
   const [isLoadingActive, setIsLoadingActive] = React.useState(true);
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -144,6 +147,18 @@ function App() {
       });
   };
 
+    const handleRegistration = (data) => {
+    return auth
+      .register(data)
+      .then(() => {
+        setIsRegistration(true);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsRegistration(false);
+      });
+  };
+
 
   return (
     <>
@@ -155,7 +170,7 @@ function App() {
             {' '}
             <Header btnHeaderText={'Войти'} />
             <Routes>
-              <Route
+              {/* <Route
                 path="/"
                 element={
                   <ProtectedRoute
@@ -170,11 +185,11 @@ function App() {
                     onCardLikeClick={handleCardLike}
                   />
                 }
-              />
-              <Route path="/signup" element={<Register />} loggedIn={isLoggedIn} />
+              /> */}
+              <Route path="/signup" element={<Register onRegister={handleRegistration} />} loggedIn={isLoggedIn} />
               <Route path="/signin" element={<Login />} loggedIn={isLoggedIn} />
 
-              {/* <Route
+              <Route
                 path="/"
                 element={ 
                   <Main
@@ -188,7 +203,7 @@ function App() {
                     onCardLikeClick={handleCardLike}
                   />
                 }
-              /> */}
+              />
             </Routes>
             <Footer />
           </>
@@ -215,7 +230,7 @@ function App() {
           onDelete={handleDeleteClick}
         />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} />
-        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} isCorrectLogin={false} />
+        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} isCorrectLogin={isRegistration} />
       </CurrentUserContext.Provider>
     </>
   );

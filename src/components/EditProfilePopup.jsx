@@ -6,20 +6,13 @@ import PopupWithForm from './PopupWithForm';
 function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   const currentUser = React.useContext(CurrentUserContext);
 
-  const { values, handleChange, errors, isValid, setIsValid, setValues, resetForm } =
+  const { values, handleChange, errors, isValid,  setValues, resetForm } =
     useFormAndValidation();
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
-    if (currentUser) {
-      setValues(currentUser);
-      setIsValid(true);
-    }
-
-    if (!isOpen) {
-      resetForm();
-    }
-  }, [currentUser, isOpen]);
+    currentUser ? setValues(currentUser) : resetForm();
+  }, [currentUser, resetForm, setValues, isOpen]);
 
   // function handleChangeName(e) {
   //   setName(e.target.value);
