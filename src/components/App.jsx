@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes,useNavigate } from 'react-router-dom';
 
 import '../index.css';
 import Header from './Header';
@@ -12,6 +12,7 @@ import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
 import Loading from './Loading';
+import PageNotFound from './PageNotFound';
 import Login from './Login';
 import Register from './Register';
 import InfoTooltip from './InfoTooltip';
@@ -38,6 +39,8 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
 
   const [cards, setCards] = React.useState([]);
+
+  const navigate = useNavigate(); 
 
   React.useEffect(() => {
     setIsLoadingActive(true);
@@ -151,12 +154,31 @@ function App() {
     return auth
       .register(data)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         setIsRegistration(true);
+        navigate('/signin', {replace: true});
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         setIsRegistration(false);
+      });
+  };
+
+  const handleAuthorization = (data) => {
+    return auth
+      .authorize(data)
+      .then((data) => {
+        console.log(data)
+        if (data.jwt) {
+          setIsLoggedIn(true)
+          localStorage.setItem('jwt', data.jwt);
+          navigate('/', {replace: true});
+          return data;
+        }
+      })
+      .catch((err) => {
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+        setIsLoggedIn(false);
       });
   };
 
@@ -191,8 +213,8 @@ function App() {
                 element={<Register onRegister={handleRegistration} />}
                 loggedIn={isLoggedIn}
               />
-              <Route path="/signin" element={<Login />} loggedIn={isLoggedIn} />
-
+              <Route path="/signin" element={<Login onAuthorization={handleAuthorization}/>} loggedIn={isLoggedIn} />
+              <Route path="*" element={<PageNotFound />} />
               {/* <Route
                 path="/"
                 element={

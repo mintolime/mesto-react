@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 
 // console.log('link', Link)
 //поправить название
-function Entry({ title, children, btnText, linkText, onSubmit,isValid }) {
+function Entry({ title, children, btnText, linkText, onSubmit }) {
   return (
     <section className="login" aria-label={title}>
       <div className="login__container">
         <h3 className="login__title">{title}</h3>
-        <form name="form" className="form" onSubmit={onSubmit} isValid={isValid}>
+        <form name="form" className="form" onSubmit={onSubmit} >
           {children}
           <button className="button button_type_entry" type="submit">
             {btnText}

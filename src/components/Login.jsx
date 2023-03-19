@@ -1,16 +1,19 @@
 import Entry from './EntryForm';
 import useFormAndValidation from '../hooks/useFormAndValidation';
-function Login() {
-    const { values, handleChange, errors, isValid } = useFormAndValidation();
+function Login({onAuthorization}) {
+    const { values, handleChange, errors } = useFormAndValidation();
   // const { values } = useFormAndValidation();
-  // function handleSubmit(evt) {
-  //   // Запрещаем браузеру переходить по адресу формы
-  //   evt.preventDefault();
-  //   onRegister(values);
-  //   console.log('values', values);
-  //   console.log('i work');
-  // }
-  return <Entry title="Вход" btnText="Войти" isValid={isValid}>
+  function handleSubmit(evt) {
+    // Запрещаем браузеру переходить по адресу формы
+    evt.preventDefault();
+     if (!values.email || !values.password) {
+      return;
+    }
+    onAuthorization(values);
+    console.log('values', values);
+    console.log('i work login');
+  }
+  return <Entry title="Вход" btnText="Войти" onSubmit={handleSubmit}>
    <fieldset className="form__inner form__inner_login">
         <input
           className="form__input form__input_login"

@@ -1,11 +1,8 @@
-// import useFormAndValidation from '../hooks/useFormAndValidation';
-
 import Entry from './EntryForm';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 
-
 function Register({ onRegister }) {
-  const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const { values, handleChange, errors } = useFormAndValidation();
   // const { values } = useFormAndValidation();
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -19,9 +16,7 @@ function Register({ onRegister }) {
       title="Регистрация"
       btnText="Зарегистрироваться"
       linkText="Уже зарегистрированы? Войти"
-      onSubmit={handleSubmit}
-      isValid={isValid}
-      >
+      onSubmit={handleSubmit}>
       <fieldset className="form__inner form__inner_login">
         <input
           className="form__input form__input_login"
