@@ -3,7 +3,7 @@ import PopupWithForm from './PopupWithForm';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const { errors, isValid } = useFormAndValidation();
+  const { errors, isValid,handleChange,resetForm } = useFormAndValidation();
   const avatarLink = React.useRef();
 
   function handleSubmit(e) {
@@ -16,6 +16,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
   React.useEffect(() => {
     avatarLink.current.value = '';
+    resetForm()
   }, [isOpen]);
 
   return (
@@ -30,15 +31,16 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
       <fieldset className="form__inner">
         <input
           className="form__input"
-          name="linkAvatar"
+          name="avatarLink"
           type="url"
           id="input-avatar"
           aria-label="подпись"
           placeholder="Сcылка на аватар"
           ref={avatarLink}
+          onChange={handleChange}
           required
         />
-        <span className="form__input-error input-avatar-error">{errors.avatar}</span>
+        <span className="form__input-error input-avatar-error">{errors.avatarLink}</span>
       </fieldset>
     </PopupWithForm>
   );
