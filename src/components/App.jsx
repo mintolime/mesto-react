@@ -24,8 +24,10 @@ import { CurrentUserContext } from '../context/CurrentUserContext';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isRegistration, setIsRegistration] = React.useState(false);
+
   const [isLoadingActive, setIsLoadingActive] = React.useState(true);
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
+
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -148,11 +150,12 @@ function App() {
   const handleRegistration = (data) => {
     return auth
       .register(data)
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         setIsRegistration(true);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         setIsRegistration(false);
       });
   };
@@ -165,9 +168,9 @@ function App() {
         ) : (
           <>
             {' '}
-            <Header btnHeaderText={'Войти'} />
+            <Header btnHeaderText={'Регистрация'} />
             <Routes>
-              {/* <Route
+              <Route
                 path="/"
                 element={
                   <ProtectedRoute
@@ -182,7 +185,7 @@ function App() {
                     onCardLikeClick={handleCardLike}
                   />
                 }
-              /> */}
+              />
               <Route
                 path="/signup"
                 element={<Register onRegister={handleRegistration} />}
@@ -190,7 +193,7 @@ function App() {
               />
               <Route path="/signin" element={<Login />} loggedIn={isLoggedIn} />
 
-              <Route
+              {/* <Route
                 path="/"
                 element={
                   <Main
@@ -204,7 +207,7 @@ function App() {
                     onCardLikeClick={handleCardLike}
                   />
                 }
-              />
+              /> */}
             </Routes>
             <Footer />
           </>

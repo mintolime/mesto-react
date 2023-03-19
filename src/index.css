@@ -53,11 +53,13 @@
 @import url('./blocks/button/_type/button_type_avatar-edit.css');
 
 /* @import url('./blocks'); шаблон*/
-.button_type_header {
+.header__link-entry {
   color: #fff;
+  text-decoration: none;
+  /* text-align: center; */
 }
 
-.button_type_header:hover {
+.header__link-entry:hover {
   opacity: .6;
 }
 
