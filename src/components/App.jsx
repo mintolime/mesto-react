@@ -23,8 +23,7 @@ import { CurrentUserContext } from '../context/CurrentUserContext';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-   const [isRegistration, setIsRegistration] =
-    React.useState(false);
+  const [isRegistration, setIsRegistration] = React.useState(false);
   const [isLoadingActive, setIsLoadingActive] = React.useState(true);
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -66,7 +65,6 @@ function App() {
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setImagePopupOpen(true);
-    closeAllPopups();
   };
 
   const handleEditAvatarClick = () => {
@@ -147,7 +145,7 @@ function App() {
       });
   };
 
-    const handleRegistration = (data) => {
+  const handleRegistration = (data) => {
     return auth
       .register(data)
       .then(() => {
@@ -158,7 +156,6 @@ function App() {
         setIsRegistration(false);
       });
   };
-
 
   return (
     <>
@@ -186,12 +183,16 @@ function App() {
                   />
                 }
               /> */}
-              <Route path="/signup" element={<Register onRegister={handleRegistration} />} loggedIn={isLoggedIn} />
+              <Route
+                path="/signup"
+                element={<Register onRegister={handleRegistration} />}
+                loggedIn={isLoggedIn}
+              />
               <Route path="/signin" element={<Login />} loggedIn={isLoggedIn} />
 
               <Route
                 path="/"
-                element={ 
+                element={
                   <Main
                     // loggedIn={isLoggedIn}
                     cards={cards}
@@ -230,7 +231,11 @@ function App() {
           onDelete={handleDeleteClick}
         />
         <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} />
-        <InfoTooltip isOpen={isInfoTooltipOpen} onClose={closeAllPopups} isCorrectLogin={isRegistration} />
+        <InfoTooltip
+          isOpen={isInfoTooltipOpen}
+          onClose={closeAllPopups}
+          isCorrectLogin={isRegistration}
+        />
       </CurrentUserContext.Provider>
     </>
   );
