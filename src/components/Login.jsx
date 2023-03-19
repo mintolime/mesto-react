@@ -1,20 +1,22 @@
 import Entry from './EntryForm';
 import useFormAndValidation from '../hooks/useFormAndValidation';
-function Login({onAuthorization}) {
-    const { values, handleChange, errors } = useFormAndValidation();
+function Login({ onAuthorization }) {
+  const { values, handleChange, errors, resetForm } = useFormAndValidation();
   // const { values } = useFormAndValidation();
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
-     if (!values.email || !values.password) {
+    if (!values.email || !values.password) {
       return;
     }
     onAuthorization(values);
+    resetForm();
     console.log('values', values);
     console.log('i work login');
   }
-  return <Entry title="Вход" btnText="Войти" onSubmit={handleSubmit}>
-   <fieldset className="form__inner form__inner_login">
+  return (
+    <Entry title="Вход" btnText="Войти" onSubmit={handleSubmit}>
+      <fieldset className="form__inner form__inner_login">
         <input
           className="form__input form__input_login"
           value={values.email || ''}
@@ -42,6 +44,7 @@ function Login({onAuthorization}) {
         />
         <span className="form__input-error"> {errors.password}</span>
       </fieldset>
-  </Entry>;
+    </Entry>
+  );
 }
 export default Login;

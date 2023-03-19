@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes,useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import '../index.css';
 import Header from './Header';
@@ -25,7 +25,6 @@ import { CurrentUserContext } from '../context/CurrentUserContext';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isRegistration, setIsRegistration] = React.useState(false);
-
   const [isLoadingActive, setIsLoadingActive] = React.useState(true);
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
 
@@ -40,7 +39,7 @@ function App() {
 
   const [cards, setCards] = React.useState([]);
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     setIsLoadingActive(true);
@@ -82,6 +81,10 @@ function App() {
 
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(true);
+  };
+
+  const handleRegistrationSuccess = () => {
+    setIsInfoTooltipOpen(true);
   };
 
   const handleDeletePlaceClick = (card) => {
@@ -156,25 +159,27 @@ function App() {
       .then((res) => {
         console.log(res);
         setIsRegistration(true);
-        navigate('/signin', {replace: true});
+        handleRegistrationSuccess()
+        navigate('/signin', { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         setIsRegistration(false);
-      });
+        handleRegistrationSuccess()
+      })
+      .finally(()=>{closeAllPopups()})
   };
 
+  //вход работает
   const handleAuthorization = (data) => {
     return auth
       .authorize(data)
       .then((data) => {
-        console.log(data)
-        if (data.jwt) {
-          setIsLoggedIn(true)
-          localStorage.setItem('jwt', data.jwt);
-          navigate('/', {replace: true});
-          return data;
-        }
+        console.log(data);
+        console.log('token', data.token);
+        setIsLoggedIn(true);
+        localStorage.setItem('jwt', data.token);
+        navigate('/', { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
@@ -213,7 +218,11 @@ function App() {
                 element={<Register onRegister={handleRegistration} />}
                 loggedIn={isLoggedIn}
               />
-              <Route path="/signin" element={<Login onAuthorization={handleAuthorization}/>} loggedIn={isLoggedIn} />
+              <Route
+                path="/signin"
+                element={<Login onAuthorization={handleAuthorization} />}
+                loggedIn={isLoggedIn}
+              />
               <Route path="*" element={<PageNotFound />} />
               {/* <Route
                 path="/"
@@ -231,7 +240,7 @@ function App() {
                 }
               /> */}
             </Routes>
-            <Footer />
+            {isLoggedIn && <Footer />}
           </>
         )}
         <EditProfilePopup
