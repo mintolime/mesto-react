@@ -2,7 +2,7 @@ function PopupWithForm({ name, title, children, btnText, isOpen, onClose, onSubm
   return (
     <section
       className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}
-      aria-label="обновление аватара">
+      aria-label={title}>
       <div className="popup__container">
         <h3 className="popup__title">{title}</h3>
         <form name={name} className="form" onSubmit={onSubmit}>

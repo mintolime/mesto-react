@@ -85,6 +85,7 @@ function App() {
 
   const handleRegistrationSuccess = () => {
     setIsInfoTooltipOpen(true);
+     console.log('isInfoTooltipOpen',isInfoTooltipOpen)
   };
 
   const handleDeletePlaceClick = (card) => {
@@ -167,7 +168,6 @@ function App() {
         setIsRegistration(false);
         handleRegistrationSuccess()
       })
-      .finally(()=>{closeAllPopups()})
   };
 
   //вход работает
