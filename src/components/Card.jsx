@@ -1,7 +1,7 @@
 import React from 'react';
 import { CurrentUserContext } from '../context/CurrentUserContext';
 
-function Card({ card, onCardClick, onCardDeleteClick, onCardLikeClick, }) {
+function Card({ card, onCardClick, onCardDeleteClick, onCardLikeClick }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const isOwn = card.owner._id === currentUser._id;
@@ -32,7 +32,9 @@ function Card({ card, onCardClick, onCardDeleteClick, onCardLikeClick, }) {
             </span>
           </div>
         </div>
-        {isOwn && <button className="button button_type_delete" onClick={() => onCardDeleteClick(card)} />}
+        {isOwn && (
+          <button className="button button_type_delete" onClick={() => onCardDeleteClick(card)} />
+        )}
       </li>
     </>
   );
