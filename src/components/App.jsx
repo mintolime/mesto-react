@@ -211,7 +211,12 @@ function App() {
         });
     }
   };
-
+ 
+  const handleLogout = () =>{
+     localStorage.removeItem('jwt');
+    navigate('/signin', { replace: true });
+    setIsLoggedIn(false);
+  }
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -220,7 +225,7 @@ function App() {
         ) : (
           <>
             {' '}
-            <Header isCorrectLogin={isLoggedIn} />
+            <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout}  />
             <Routes>
               <Route
                 path="/"
