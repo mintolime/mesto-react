@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-// console.log('link', Link)
 //поправить название
-function Entry({ title, children, btnText, linkText, onSubmit }) {
+function EntryForm({ title, children, btnText, linkText, onSubmit }) {
   return (
     <section className="login" aria-label={title}>
       <div className="login__container">
@@ -21,4 +20,4 @@ function Entry({ title, children, btnText, linkText, onSubmit }) {
     </section>
   );
 }
-export default Entry;
+export default EntryForm;

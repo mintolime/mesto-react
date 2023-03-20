@@ -1,18 +1,16 @@
-import Entry from './EntryForm';
+import EntryForm from './EntryForm';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 
 function Register({ onRegister }) {
   const { values, handleChange, errors } = useFormAndValidation();
-  // const { values } = useFormAndValidation();
+  
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
     onRegister(values);
-    console.log('values', values);
-    console.log('i work');
   }
   return (
-    <Entry
+    <EntryForm
       title="Регистрация"
       btnText="Зарегистрироваться"
       linkText="Уже зарегистрированы? Войти"
@@ -45,7 +43,7 @@ function Register({ onRegister }) {
         />
         <span className="form__input-error"> {errors.password}</span>
       </fieldset>
-    </Entry>
+    </EntryForm>
   );
 }
 export default Register;

@@ -14,9 +14,9 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
     currentUser ? resetForm(currentUser) : resetForm();
   }, [currentUser, isOpen]);
 
-  function handleSubmit(e) {
+  function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
-    e.preventDefault();
+    evt.preventDefault();
 
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({

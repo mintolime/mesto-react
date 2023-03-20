@@ -3,14 +3,14 @@ import PopupWithForm from './PopupWithForm';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 
 const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
-    const { errors, isValid,handleChange,resetForm } = useFormAndValidation();
+  const { errors, isValid, handleChange, resetForm } = useFormAndValidation();
   const cardName = React.useRef();
   const cardLink = React.useRef();
 
   React.useEffect(() => {
     cardName.current.value = '';
     cardLink.current.value = '';
-    resetForm()
+    resetForm();
   }, [isOpen]);
 
   function handleSubmit(e) {

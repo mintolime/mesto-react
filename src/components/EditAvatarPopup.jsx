@@ -3,7 +3,7 @@ import PopupWithForm from './PopupWithForm';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const { errors, isValid,handleChange,resetForm } = useFormAndValidation();
+  const { errors, isValid, handleChange, resetForm } = useFormAndValidation();
   const avatarLink = React.useRef();
 
   function handleSubmit(evt) {
@@ -16,7 +16,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
 
   React.useEffect(() => {
     avatarLink.current.value = '';
-    resetForm()
+    resetForm();
   }, [isOpen]);
 
   return (

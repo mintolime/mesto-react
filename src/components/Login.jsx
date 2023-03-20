@@ -1,8 +1,9 @@
-import Entry from './EntryForm';
+import EntryForm from './EntryForm';
 import useFormAndValidation from '../hooks/useFormAndValidation';
+
 function Login({ onAuthorization }) {
-  const { values, handleChange, errors, resetForm } = useFormAndValidation();
-  // const { values } = useFormAndValidation();
+  const { values, handleChange, errors } = useFormAndValidation();
+
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
     evt.preventDefault();
@@ -10,12 +11,9 @@ function Login({ onAuthorization }) {
       return;
     }
     onAuthorization(values);
-    resetForm();
-    console.log('values', values);
-    console.log('i work login');
   }
   return (
-    <Entry title="Вход" btnText="Войти" onSubmit={handleSubmit}>
+    <EntryForm title="Вход" btnText="Войти" onSubmit={handleSubmit}>
       <fieldset className="form__inner form__inner_login">
         <input
           className="form__input form__input_login"
@@ -44,7 +42,7 @@ function Login({ onAuthorization }) {
         />
         <span className="form__input-error"> {errors.password}</span>
       </fieldset>
-    </Entry>
+    </EntryForm>
   );
 }
 export default Login;

@@ -27,7 +27,7 @@ function App() {
   const [isRegistration, setIsRegistration] = React.useState(false);
   const [isLoadingActive, setIsLoadingActive] = React.useState(true);
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
-  const [userInfo,setUserInfo] = React.useState('');
+  const [userInfo, setUserInfo] = React.useState('');
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -180,6 +180,7 @@ function App() {
       .authorize(data)
       .then((data) => {
         setIsLoggedIn(true);
+        handleСheckToken();
         localStorage.setItem('jwt', data.token);
         navigate('/', { replace: true });
       })
@@ -201,7 +202,7 @@ function App() {
           console.log('work');
           if (res) {
             // авторизуем пользователя
-           setUserInfo(res.data.email)
+            setUserInfo(res.data.email);
             setIsLoggedIn(true);
             navigate('/', { replace: true });
           }
@@ -211,12 +212,12 @@ function App() {
         });
     }
   };
- 
-  const handleLogout = () =>{
-     localStorage.removeItem('jwt');
+
+  const handleLogout = () => {
+    localStorage.removeItem('jwt');
     navigate('/signin', { replace: true });
     setIsLoggedIn(false);
-  }
+  };
   return (
     <>
       <CurrentUserContext.Provider value={currentUser}>
@@ -225,7 +226,7 @@ function App() {
         ) : (
           <>
             {' '}
-            <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout} userEmail={userInfo}  />
+            <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout} userEmail={userInfo} />
             <Routes>
               <Route
                 path="/"
