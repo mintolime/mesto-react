@@ -37,7 +37,6 @@
 @import url('./blocks/popup/__container/_login/popup__container_login.css');
 @import url('./blocks/popup/__container/_login/popup__container_login-icon.css');
 @import url('./blocks/popup/__container/_login/popup__container_login-title.css');
-
 /*FORM*/
 @import url('./blocks/form/form.css');
 @import url('./blocks/form/__input/form__input.css');
@@ -69,6 +68,10 @@
 @import url('./blocks/button/_type/button_type_logout.css');
 @import url('./blocks/button/_type/button_type_entry.css');
 
+/*NOT FOUND*/
+@import url('./blocks/neonText/neonText.css');
+@import url('./blocks/neonText/__title/neonText__title.css');
+@import url('./blocks/neonText/__subtitle/nextText__subtitle.css');
 /* @import url('./blocks'); шаблон*/
 
 
