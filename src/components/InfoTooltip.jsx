@@ -12,9 +12,9 @@ function InfoTooltip({ isOpen, onClose, isCorrectLogin }) {
         <img
           src={isCorrectLogin ? successIcon : errorIcon}
           alt={isCorrectLogin ? 'Регистрация прошла успешно' : 'Регистрация не прошла'}
-          className="popup__login-icon"
+          className="popup__container_login-icon"
         />
-        <h3 className="popup__login-title">
+        <h3 className="popup__container_login-title">
           {isCorrectLogin
             ? 'Вы успешно зарегистрировались!'
             : 'Что-то пошло не так! Попробуйте ещё раз.'}

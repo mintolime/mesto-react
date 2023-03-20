@@ -5,8 +5,12 @@
 @import url('./blocks/root/root__container/root__container.css');
 @import url('./blocks/main/main.css');
 @import url('./blocks/header/header.css');
-@import url('./blocks/header/__logo/header__logo.css');
 @import url('./blocks/loading/loading.css');
+/*HEADER*/
+@import url('./blocks/header/__logo/header__logo.css');
+@import url('./blocks/header/__nav/header__nav.css');
+@import url('./blocks/header/__link-entry/header__link-entry.css');
+@import url('./blocks/header/__email/header__email.css');
 /* PROFILE */
 @import url('./blocks/profile/profile.css');
 @import url('./blocks/profile/__photo/profile__photo.css');
@@ -30,15 +34,26 @@
 @import url('./blocks/popup/_opened/popup_opened.css');
 @import url('./blocks/popup/__container/popup__container.css');
 @import url('./blocks/popup/__container/_image/popup__container_image.css');
+@import url('./blocks/popup/__container/_login/popup__container_login.css');
+@import url('./blocks/popup/__container/_login/popup__container_login-icon.css');
+@import url('./blocks/popup/__container/_login/popup__container_login-title.css');
+
 /*FORM*/
 @import url('./blocks/form/form.css');
 @import url('./blocks/form/__input/form__input.css');
 @import url('./blocks/form/__input/form__input-error.css');
 @import url('./blocks/form/__inner/form__inner.css');
+@import url('./blocks/form/__inner/_login/form__inner_login.css');
+@import url('./blocks/form/__input/_login/form__input_login.css');
 /*FIGURE*/
 @import url('./blocks/figure/figure.css');
 @import url('./blocks/figure/__image/figure__image.css');
 @import url('./blocks/figure/__info/figure__info.css');
+/*LOGIN*/
+@import url('./blocks/login/login.css');
+@import url('./blocks/login/__title/login__title.css');
+@import url('./blocks/login/__container/login__container.css');
+@import url('./blocks/login/__auth-link/login__auth-link.css');
 /*BUTTONS*/
 @import url('./blocks/button/button.css');
 @import url('./blocks/button/_type/button_type_add.css');
@@ -51,155 +66,22 @@
 @import url('./blocks/button/_type/button_type_disable.css');
 @import url('./blocks/button/_type/button_type_delete_inactive.css');
 @import url('./blocks/button/_type/button_type_avatar-edit.css');
+@import url('./blocks/button/_type/button_type_logout.css');
+@import url('./blocks/button/_type/button_type_entry.css');
 
 /* @import url('./blocks'); шаблон*/
-.header__link-entry {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  padding-right: 30px;
-}
-
-.header__link-entry:hover {
-  opacity: .6;
-}
-
-.button_type_entry {
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  width: 100%;
-  color: #000;
-  border-radius: 2px;
-  margin-top: 17px;
-  padding: 13px 84px;
-  transition: 0.3s ease;
-  background-color: #fff;
-}
-
-.login {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 60px 0 80px;
-}
-
-.login__container {
-  width: 360px;
-}
-
-.login__auth-link {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 17px;
-  text-align: center;
-  color: #fff;
-  text-decoration: none;
-  padding-top: 15px;
-}
-
-.login__title {
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  padding: 0 0 50px;
-  margin: 0;
-}
-
-.form__input_login {
-  background-color: black;
-  color: white;
-  border-bottom: 2px solid #ccc;
-  font-weight: 500;
-}
-
-.form__inner_login {
-  padding: 0 0 216px;
-}
-
-.popup__login-icon {
-  display: block;
-  width: 120px;
-  height: 120px;
-  margin: 0 auto;
-}
-
-.popup__container_login {
-  padding-top: 60px;
-  padding-bottom: 60px;
-}
-
-.popup__login-title {
-  font-weight: 900;
-  font-size: 24px;
-  line-height: 29px;
-  text-align: center;
-  color: #000000;
-  padding: 32px 0 0;
-  margin: 0;
-}
 
 
-/* NotFound */
-.neonText {
-  color: #fff;
-  text-shadow:
-    0 0 7px #dedddd,
-    0 0 10px #fff,
-    0 0 21px #fff,
-    0 0 42px #35C4F0,
-    0 0 82px #35C4F0,
-    0 0 92px #35C4F0,
-    0 0 102px #0fa,
-    0 0 151px #0fa;
-  text-align: center;
-  text-transform: uppercase;
-  font-weight: 400;
-  padding-bottom: 150px;
-}
 
-.neonText__title {
-  font-size: 6.2rem;
-}
 
-.neonText__subtitle {
-  font-size: 1.8rem;
-}
 
-.header__email {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: right;
-  padding: 0;
-  margin: 0;
-}
 
-.header__nav {
-  max-width: 300px;
-  display: flex;
-  gap: 24px;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 22px;
-  /* identical to box height, or 122% */
-  /* text-align: right; */
-  align-items: center;
-}
 
-.button_type_logout {
-  text-decoration: none;
-  color: #A9A9A9;
-  cursor: pointer;
-}
 
-.button_type_logout:hover {
-  opacity: .6;
-}
+
+
+
+
+
+
+
