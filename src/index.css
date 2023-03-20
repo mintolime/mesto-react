@@ -173,11 +173,8 @@
 }
 
 .header__email {
-  /* font-weight: 500;
-  font-size: 18px;
-  line-height: 22px;
-  /* identical to box height, or 122% */
-
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-align: right;
   padding: 0;
   margin: 0;

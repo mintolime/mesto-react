@@ -27,6 +27,7 @@ function App() {
   const [isRegistration, setIsRegistration] = React.useState(false);
   const [isLoadingActive, setIsLoadingActive] = React.useState(true);
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
+  const [userInfo,setUserInfo] = React.useState('');
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -178,8 +179,6 @@ function App() {
     return auth
       .authorize(data)
       .then((data) => {
-        console.log(data);
-        console.log('token', data.token);
         setIsLoggedIn(true);
         localStorage.setItem('jwt', data.token);
         navigate('/', { replace: true });
@@ -202,6 +201,7 @@ function App() {
           console.log('work');
           if (res) {
             // авторизуем пользователя
+           setUserInfo(res.data.email)
             setIsLoggedIn(true);
             navigate('/', { replace: true });
           }
@@ -225,7 +225,7 @@ function App() {
         ) : (
           <>
             {' '}
-            <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout}  />
+            <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout} userEmail={userInfo}  />
             <Routes>
               <Route
                 path="/"

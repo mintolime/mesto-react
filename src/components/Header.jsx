@@ -2,12 +2,9 @@ import logo from '../images/header-logo.svg';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
-function Header({ isCorrectLogin, onLogout }) {
-  // const btnHeaderText = 'Регистрация'
-  console.log('isCorrectLogin', isCorrectLogin);
+function Header({ isCorrectLogin, onLogout, userEmail }) {
   const location = useLocation();
-  console.log(location);
-  //переделать
+
   return (
     <header className="header">
       <img className="header__logo" src={logo} alt="логотип шапки сайта" />
@@ -24,7 +21,7 @@ function Header({ isCorrectLogin, onLogout }) {
 
       {isCorrectLogin ? (
         <nav className="header__nav">
-          <p className="header__email">тут будет почта ✨</p>
+          <p className="header__email">{userEmail}</p>
           <button className="button button_type_logout" onClick={() => onLogout()}>
             Выйти
           </button>
