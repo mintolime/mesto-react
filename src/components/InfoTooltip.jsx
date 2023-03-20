@@ -2,8 +2,7 @@ import successIcon from '../images/icon/icon-success-login.png';
 import errorIcon from '../images/icon/icon-error-login.png';
 
 function InfoTooltip({ isOpen, onClose, isCorrectLogin }) {
-  console.log('isCorrectLogin',isCorrectLogin)
-   console.log('isOpen',isOpen)
+
   return (
     <section
       className={`popup  ${isOpen ? 'popup_opened' : ''}`}

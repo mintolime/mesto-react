@@ -56,6 +56,10 @@ function App() {
       });
   }, []);
 
+  React.useEffect(() => {
+    handleСheckToken();
+  }, []);
+
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -85,7 +89,6 @@ function App() {
 
   const handleRegistrationSuccess = () => {
     setIsInfoTooltipOpen(true);
-     console.log('isInfoTooltipOpen',isInfoTooltipOpen)
   };
 
   const handleDeletePlaceClick = (card) => {
@@ -160,14 +163,14 @@ function App() {
       .then((res) => {
         console.log(res);
         setIsRegistration(true);
-        handleRegistrationSuccess()
+        handleRegistrationSuccess();
         navigate('/signin', { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         setIsRegistration(false);
-        handleRegistrationSuccess()
-      })
+        handleRegistrationSuccess();
+      });
   };
 
   //вход работает
@@ -184,7 +187,29 @@ function App() {
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         setIsLoggedIn(false);
+        handleRegistrationSuccess();
       });
+  };
+
+  const handleСheckToken = () => {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
+      console.log(jwt);
+      // проверим токен
+      auth
+        .getContent(jwt)
+        .then((res) => {
+          console.log('work');
+          if (res) {
+            // авторизуем пользователя
+            setIsLoggedIn(true);
+            navigate('/', { replace: true });
+          }
+        })
+        .catch((err) => {
+          console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
+        });
+    }
   };
 
   return (
@@ -195,7 +220,7 @@ function App() {
         ) : (
           <>
             {' '}
-            <Header btnHeaderText={'Регистрация'} />
+            <Header isCorrectLogin={isLoggedIn} />
             <Routes>
               <Route
                 path="/"
