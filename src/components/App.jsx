@@ -1,3 +1,5 @@
+//Примите мои извинения , вышло недоразумение. отправляю проект повторно в полном виде!
+
 import React from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
@@ -225,7 +227,6 @@ function App() {
           <Loading error={isErrorMessage} />
         ) : (
           <>
-            {' '}
             <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout} userEmail={userInfo} />
             <Routes>
               <Route
@@ -255,21 +256,6 @@ function App() {
                 loggedIn={isLoggedIn}
               />
               <Route path="*" element={<PageNotFound />} />
-              {/* <Route
-                path="/"
-                element={
-                  <Main
-                    // loggedIn={isLoggedIn}
-                    cards={cards}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    onCardClick={handleCardClick}
-                    onCardDeleteClick={handleDeletePlaceClick}
-                    onCardLikeClick={handleCardLike}
-                  />
-                }
-              /> */}
             </Routes>
             {isLoggedIn && <Footer />}
           </>
