@@ -1,3 +1,5 @@
+import handleResponce from "./utils";
+
 class Api {
   constructor({ url, headers }) {
     this.url = url;
@@ -11,7 +13,7 @@ class Api {
   getAllCards() {
     return fetch(`${this.url}/cards`, {
       headers: this.headers,
-    }).then((res) => this._handleResponce(res));
+    }).then((res) => handleResponce(res));
   }
 
   createCards(data) {
@@ -19,13 +21,13 @@ class Api {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify(data),
-    }).then((res) => this._handleResponce(res));
+    }).then((res) => handleResponce(res));
   }
 
   getUserData() {
     return fetch(`${this.url}/users/me `, {
       headers: this.headers,
-    }).then((res) => this._handleResponce(res));
+    }).then((res) => handleResponce(res));
   }
 
   updateUserInfo(data) {
@@ -33,7 +35,7 @@ class Api {
       method: 'PATCH',
       headers: this.headers,
       body: JSON.stringify(data),
-    }).then((res) => this._handleResponce(res));
+    }).then((res) => handleResponce(res));
   }
 
   changeAvatar(data) {
@@ -41,14 +43,14 @@ class Api {
       method: 'PATCH',
       body: JSON.stringify(data),
       headers: this.headers,
-    }).then((res) => this._handleResponce(res));
+    }).then((res) => handleResponce(res));
   }
 
   deleteCard(cardId) {
     return fetch(`${this.url}/cards/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,
-    }).then((res) => this._handleResponce(res));
+    }).then((res) => handleResponce(res));
   }
 
   changeLikeCardStatus(id, isLiked) {
@@ -56,12 +58,12 @@ class Api {
       return fetch(`${this.url}/cards/${id}/likes`, {
         method: 'PUT',
         headers: this.headers,
-      }).then((res) => this._handleResponce(res));
+      }).then((res) => handleResponce(res));
     } else {
       return fetch(`${this.url}/cards/${id}/likes`, {
         method: 'DELETE',
         headers: this.headers,
-      }).then((res) => this._handleResponce(res));
+      }).then((res) => handleResponce(res));
     }
   }
 
