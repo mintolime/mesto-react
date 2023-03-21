@@ -1,3 +1,5 @@
+import handleResponce from "./utils";
+
 export const BASE_URL = 'https://auth.nomoreparties.co';
 
 const headers = {
@@ -5,12 +7,7 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const handleResponce = (res) => {
-  if (res.ok) {
-    return res.json();
-  }
-  return Promise.reject(res.status);
-};
+
 
 export const register = ({ email, password }) => {
   return fetch(`${BASE_URL}/signup`, {
