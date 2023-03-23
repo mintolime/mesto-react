@@ -12,7 +12,6 @@ function Card({ card, onCardClick, onCardDeleteClick, onCardLikeClick }) {
   const cardLikeButtonClassName = `button button_type_like ${isLiked && 'button_type_like_active'}`;
 
   return (
-    <>
       <li className="cards__item">
         <img
           onClick={() => onCardClick(card)}
@@ -36,7 +35,6 @@ function Card({ card, onCardClick, onCardDeleteClick, onCardLikeClick }) {
           <button className="button button_type_delete" onClick={() => onCardDeleteClick(card)} />
         )}
       </li>
-    </>
   );
 }
 

@@ -1,5 +1,3 @@
-//тест
-
 import React from 'react';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 
@@ -28,8 +26,9 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isRegistration, setIsRegistration] = React.useState(false);
   const [isLoadingActive, setIsLoadingActive] = React.useState(true);
+  const [isLoadingText, setIsLoadingText] = React.useState(false);
   const [isErrorMessage, setIsErrorMessage] = React.useState('');
-  const [userInfo, setUserInfo] = React.useState('');
+  const [email, setEmail] = React.useState('');
 
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -43,6 +42,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   const navigate = useNavigate();
+  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard.link
 
   React.useEffect(() => {
     setIsLoadingActive(true);
@@ -62,6 +62,24 @@ function App() {
   React.useEffect(() => {
     handleСheckToken();
   }, []);
+
+  
+
+  React.useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+    if (isOpen) { // навешиваем только при открытии
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+    }
+
+  }, [isOpen])
+
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -100,6 +118,7 @@ function App() {
   };
 
   const handleUpdateUser = (data) => {
+    setIsLoadingText(true)
     apiData
       .updateUserInfo(data)
       .then((data) => {
@@ -109,10 +128,12 @@ function App() {
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-      });
+      })
+      .finally(() => { setIsLoadingText(false) })
   };
 
   const handleAddPlaceSubmit = (newCard) => {
+    setIsLoadingText(true)
     apiData
       .createCards(newCard)
       .then((newCard) => {
@@ -121,10 +142,12 @@ function App() {
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-      });
+      })
+      .finally(() => { setIsLoadingText(false) })
   };
 
   const handleUpdateAvatar = (data) => {
+    setIsLoadingText(true)
     apiData
       .changeAvatar(data)
       .then((data) => {
@@ -133,10 +156,12 @@ function App() {
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-      });
+      })
+      .finally(() => { setIsLoadingText(false) })
   };
 
   const handleDeleteClick = (card) => {
+    setIsLoadingText(true)
     apiData
       .deleteCard(card._id)
       .then(() => {
@@ -145,7 +170,8 @@ function App() {
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
-      });
+      })
+      .finally(() => { setIsLoadingText(false) })
   };
 
   const handleCardLike = (card) => {
@@ -166,29 +192,30 @@ function App() {
       .then((res) => {
         console.log(res);
         setIsRegistration(true);
-        handleRegistrationSuccess();
+        handleRegistrationSuccess()
         navigate('/signin', { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         setIsRegistration(false);
-        handleRegistrationSuccess();
-      });
+      })
+      .finally(() => { handleRegistrationSuccess() })
   };
 
-  //вход работает
   const handleAuthorization = (data) => {
     return auth
       .authorize(data)
       .then((data) => {
         setIsLoggedIn(true);
-        handleСheckToken();
+        //при запросе авторизации проверяет токен, который возвращает email пользователя
+        auth.checkToken(data.token).then((res) => { setEmail(res.data.email) })
         localStorage.setItem('jwt', data.token);
         navigate('/', { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         setIsLoggedIn(false);
+        setIsRegistration(false);
         handleRegistrationSuccess();
       });
   };
@@ -196,15 +223,13 @@ function App() {
   const handleСheckToken = () => {
     const jwt = localStorage.getItem('jwt');
     if (jwt) {
-      console.log(jwt);
       // проверим токен
       auth
         .checkToken(jwt)
         .then((res) => {
-          console.log('work');
           if (res) {
-            // авторизуем пользователя
-            setUserInfo(res.data.email);
+            //при перезагрузке без данного свойства email теряется 
+            setEmail(res.data.email)
             setIsLoggedIn(true);
             navigate('/', { replace: true });
           }
@@ -221,13 +246,12 @@ function App() {
     setIsLoggedIn(false);
   };
   return (
-    <>
       <CurrentUserContext.Provider value={currentUser}>
         {isLoadingActive ? (
           <Loading error={isErrorMessage} />
         ) : (
           <>
-            <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout} userEmail={userInfo} />
+            <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout} userEmail={email} />
             <Routes>
               <Route
                 path="/"
@@ -261,21 +285,25 @@ function App() {
           </>
         )}
         <EditProfilePopup
+          isLoading={isLoadingText}
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
           onUpdateUser={handleUpdateUser}
         />
         <EditAvatarPopup
+          isLoading={isLoadingText}
           isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopups}
           onUpdateAvatar={handleUpdateAvatar}
         />
         <AddPlacePopup
+          isLoading={isLoadingText}
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
         />
         <DeleteConfirmPopup
+          isLoading={isLoadingText}
           card={selectedCard}
           onClose={closeAllPopups}
           isOpen={isDeleteCardPopupOpen}
@@ -288,7 +316,6 @@ function App() {
           isCorrectLogin={isRegistration}
         />
       </CurrentUserContext.Provider>
-    </>
   );
 }
 

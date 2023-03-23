@@ -1,29 +1,31 @@
 import React from 'react';
+import { CurrentUserContext } from '../context/CurrentUserContext';
 import PopupWithForm from './PopupWithForm';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 
-function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
-  const { errors, isValid, handleChange, resetForm } = useFormAndValidation();
-  const avatarLink = React.useRef();
+function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
+  const currentUser = React.useContext(CurrentUserContext);
+
+  const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation();
 
   function handleSubmit(evt) {
     evt.preventDefault();
 
     onUpdateAvatar({
-      avatar: avatarLink.current.value,
+      avatar: values.avatarLink,
     });
   }
 
   React.useEffect(() => {
-    avatarLink.current.value = '';
-    resetForm();
-  }, [isOpen]);
+    currentUser ? resetForm(currentUser) : resetForm();
+  }, [resetForm, currentUser, isOpen]);
 
   return (
     <PopupWithForm
       isOpen={isOpen}
       onClose={onClose}
       isValid={isValid}
+      isLoading={isLoading}
       onSubmit={handleSubmit}
       title="Обновить аватар"
       name="avatar"
@@ -36,7 +38,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar }) {
           id="input-avatar"
           aria-label="подпись"
           placeholder="Сcылка на аватар"
-          ref={avatarLink}
+          value={values.avatarLink || ''}
           onChange={handleChange}
           required
         />

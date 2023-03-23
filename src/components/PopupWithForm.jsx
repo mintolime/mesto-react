@@ -1,7 +1,7 @@
-function PopupWithForm({ name, title, children, btnText, isOpen, onClose, onSubmit, isValid }) {
+function PopupWithForm({ name, title, children, isOpen, onClose, onSubmit, isValid, isLoading, btnText }) {
   return (
-    <section
-      className={`popup popup_type_${name} ${isOpen ? 'popup_opened' : ''}`}
+    isOpen && <section
+      className={` popup popup_type_${name} popup_opened `}
       aria-label={title}>
       <div className="popup__container">
         <h3 className="popup__title">{title}</h3>
@@ -10,7 +10,7 @@ function PopupWithForm({ name, title, children, btnText, isOpen, onClose, onSubm
           <button
             className={`button button_type_save ${isValid ? '' : 'button_type_disable'}`}
             type="submit">
-            {btnText}
+            {`${isLoading ? "Сохранение..." : btnText}`}
           </button>
         </form>
         <button type="button" className=" button button_type_close" onClick={onClose}></button>

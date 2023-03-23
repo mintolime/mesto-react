@@ -1,34 +1,33 @@
 import React from 'react';
+import { CurrentUserContext } from '../context/CurrentUserContext';
 import PopupWithForm from './PopupWithForm';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 
-const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
-  const { errors, isValid, handleChange, resetForm } = useFormAndValidation();
-  const cardName = React.useRef();
-  const cardLink = React.useRef();
+const AddPlacePopup = ({ isOpen, onClose, onAddPlace, isLoading }) => {
+  const currentUser = React.useContext(CurrentUserContext);
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
 
   React.useEffect(() => {
-    cardName.current.value = '';
-    cardLink.current.value = '';
-    resetForm();
-  }, [isOpen]);
+    currentUser ? resetForm(currentUser) : resetForm();
+  }, [resetForm, currentUser, isOpen]);
 
   function handleSubmit(e) {
     e.preventDefault();
     onAddPlace({
-      name: cardName.current.value,
-      link: cardLink.current.value,
+      name: values.cardName,
+      link: values.cardLink,
     });
   }
   return (
     <PopupWithForm
       isOpen={isOpen}
       onClose={onClose}
+      isLoading={isLoading}
+      btnText="Сохранить"
       title="Новое место"
       onSubmit={handleSubmit}
       name="add-card"
-      isValid={isValid}
-      btnText="Сохранить">
+      isValid={isValid}>
       <fieldset className="form__inner">
         <input
           className="form__input  form__input_text_name"
@@ -40,7 +39,7 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
           minLength="2"
           maxLength="30"
           onChange={handleChange}
-          ref={cardName}
+          value={values.cardName || ''}
           required
         />
         <span className="form__input-error input-name-card-error">{errors.cardName}</span>
@@ -51,7 +50,7 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
           id="input-link"
           aria-label="подпись"
           placeholder="Ссылка на картинку"
-          ref={cardLink}
+          value={values.cardLink || ''}
           onChange={handleChange}
           required
         />

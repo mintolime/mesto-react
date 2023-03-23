@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../context/CurrentUserContext';
 import useFormAndValidation from '../hooks/useFormAndValidation';
 import PopupWithForm from './PopupWithForm';
 
-function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
+function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
   const currentUser = React.useContext(CurrentUserContext);
 
   const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
@@ -12,7 +12,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
   // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
     currentUser ? resetForm(currentUser) : resetForm();
-  }, [currentUser, isOpen]);
+  }, [resetForm, currentUser, isOpen]);
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
@@ -31,9 +31,11 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser }) {
       name="edit-profile"
       isOpen={isOpen}
       onClose={onClose}
+      isLoading={isLoading}
       onSubmit={handleSubmit}
+      isValid={isValid}
       btnText="Сохранить"
-      isValid={isValid}>
+    >
       <fieldset className="form__inner">
         <input
           onChange={handleChange}
