@@ -18,6 +18,7 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace, isLoading }) => {
       link: values.cardLink,
     });
   }
+  
   return (
     <PopupWithForm
       isOpen={isOpen}

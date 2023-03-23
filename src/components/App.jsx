@@ -42,7 +42,8 @@ function App() {
   const [cards, setCards] = React.useState([]);
 
   const navigate = useNavigate();
-  const isOpen = isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard.link
+  const isOpen =
+    isEditAvatarPopupOpen || isEditProfilePopupOpen || isAddPlacePopupOpen || selectedCard.link;
 
   React.useEffect(() => {
     setIsLoadingActive(true);
@@ -63,23 +64,20 @@ function App() {
     handleСheckToken();
   }, []);
 
-  
-
   React.useEffect(() => {
     function closeByEscape(evt) {
       if (evt.key === 'Escape') {
         closeAllPopups();
       }
     }
-    if (isOpen) { // навешиваем только при открытии
+    if (isOpen) {
+      // навешиваем только при открытии
       document.addEventListener('keydown', closeByEscape);
       return () => {
         document.removeEventListener('keydown', closeByEscape);
-      }
+      };
     }
-
-  }, [isOpen])
-
+  }, [isOpen]);
 
   const closeAllPopups = () => {
     setIsEditAvatarPopupOpen(false);
@@ -118,7 +116,7 @@ function App() {
   };
 
   const handleUpdateUser = (data) => {
-    setIsLoadingText(true)
+    setIsLoadingText(true);
     apiData
       .updateUserInfo(data)
       .then((data) => {
@@ -129,11 +127,13 @@ function App() {
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
       })
-      .finally(() => { setIsLoadingText(false) })
+      .finally(() => {
+        setIsLoadingText(false);
+      });
   };
 
   const handleAddPlaceSubmit = (newCard) => {
-    setIsLoadingText(true)
+    setIsLoadingText(true);
     apiData
       .createCards(newCard)
       .then((newCard) => {
@@ -143,11 +143,13 @@ function App() {
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
       })
-      .finally(() => { setIsLoadingText(false) })
+      .finally(() => {
+        setIsLoadingText(false);
+      });
   };
 
   const handleUpdateAvatar = (data) => {
-    setIsLoadingText(true)
+    setIsLoadingText(true);
     apiData
       .changeAvatar(data)
       .then((data) => {
@@ -157,11 +159,13 @@ function App() {
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
       })
-      .finally(() => { setIsLoadingText(false) })
+      .finally(() => {
+        setIsLoadingText(false);
+      });
   };
 
   const handleDeleteClick = (card) => {
-    setIsLoadingText(true)
+    setIsLoadingText(true);
     apiData
       .deleteCard(card._id)
       .then(() => {
@@ -171,7 +175,9 @@ function App() {
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
       })
-      .finally(() => { setIsLoadingText(false) })
+      .finally(() => {
+        setIsLoadingText(false);
+      });
   };
 
   const handleCardLike = (card) => {
@@ -192,14 +198,16 @@ function App() {
       .then((res) => {
         console.log(res);
         setIsRegistration(true);
-        handleRegistrationSuccess()
+        handleRegistrationSuccess();
         navigate('/signin', { replace: true });
       })
       .catch((err) => {
         console.log(`Что-то пошло не так: ошибка запроса ${err}  😔`);
         setIsRegistration(false);
       })
-      .finally(() => { handleRegistrationSuccess() })
+      .finally(() => {
+        handleRegistrationSuccess();
+      });
   };
 
   const handleAuthorization = (data) => {
@@ -208,7 +216,9 @@ function App() {
       .then((data) => {
         setIsLoggedIn(true);
         //при запросе авторизации проверяет токен, который возвращает email пользователя
-        auth.checkToken(data.token).then((res) => { setEmail(res.data.email) })
+        auth.checkToken(data.token).then((res) => {
+          setEmail(res.data.email);
+        });
         localStorage.setItem('jwt', data.token);
         navigate('/', { replace: true });
       })
@@ -228,8 +238,8 @@ function App() {
         .checkToken(jwt)
         .then((res) => {
           if (res) {
-            //при перезагрузке без данного свойства email теряется 
-            setEmail(res.data.email)
+            //при перезагрузке без данного свойства email теряется
+            setEmail(res.data.email);
             setIsLoggedIn(true);
             navigate('/', { replace: true });
           }
@@ -246,76 +256,76 @@ function App() {
     setIsLoggedIn(false);
   };
   return (
-      <CurrentUserContext.Provider value={currentUser}>
-        {isLoadingActive ? (
-          <Loading error={isErrorMessage} />
-        ) : (
-          <>
-            <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout} userEmail={email} />
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <ProtectedRoute
-                    component={Main}
-                    loggedIn={isLoggedIn}
-                    cards={cards}
-                    onEditProfile={handleEditProfileClick}
-                    onAddPlace={handleAddPlaceClick}
-                    onEditAvatar={handleEditAvatarClick}
-                    onCardClick={handleCardClick}
-                    onCardDeleteClick={handleDeletePlaceClick}
-                    onCardLikeClick={handleCardLike}
-                  />
-                }
-              />
-              <Route
-                path="/signup"
-                element={<Register onRegister={handleRegistration} />}
-                loggedIn={isLoggedIn}
-              />
-              <Route
-                path="/signin"
-                element={<Login onAuthorization={handleAuthorization} />}
-                loggedIn={isLoggedIn}
-              />
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
-            {isLoggedIn && <Footer />}
-          </>
-        )}
-        <EditProfilePopup
-          isLoading={isLoadingText}
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          onUpdateUser={handleUpdateUser}
-        />
-        <EditAvatarPopup
-          isLoading={isLoadingText}
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar}
-        />
-        <AddPlacePopup
-          isLoading={isLoadingText}
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          onAddPlace={handleAddPlaceSubmit}
-        />
-        <DeleteConfirmPopup
-          isLoading={isLoadingText}
-          card={selectedCard}
-          onClose={closeAllPopups}
-          isOpen={isDeleteCardPopupOpen}
-          onDelete={handleDeleteClick}
-        />
-        <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} />
-        <InfoTooltip
-          isOpen={isInfoTooltipOpen}
-          onClose={closeAllPopups}
-          isCorrectLogin={isRegistration}
-        />
-      </CurrentUserContext.Provider>
+    <CurrentUserContext.Provider value={currentUser}>
+      {isLoadingActive ? (
+        <Loading error={isErrorMessage} />
+      ) : (
+        <>
+          <Header isCorrectLogin={isLoggedIn} onLogout={handleLogout} userEmail={email} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <ProtectedRoute
+                  component={Main}
+                  loggedIn={isLoggedIn}
+                  cards={cards}
+                  onEditProfile={handleEditProfileClick}
+                  onAddPlace={handleAddPlaceClick}
+                  onEditAvatar={handleEditAvatarClick}
+                  onCardClick={handleCardClick}
+                  onCardDeleteClick={handleDeletePlaceClick}
+                  onCardLikeClick={handleCardLike}
+                />
+              }
+            />
+            <Route
+              path="/signup"
+              element={<Register onRegister={handleRegistration} />}
+              loggedIn={isLoggedIn}
+            />
+            <Route
+              path="/signin"
+              element={<Login onAuthorization={handleAuthorization} />}
+              loggedIn={isLoggedIn}
+            />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+          {isLoggedIn && <Footer />}
+        </>
+      )}
+      <EditProfilePopup
+        isLoading={isLoadingText}
+        isOpen={isEditProfilePopupOpen}
+        onClose={closeAllPopups}
+        onUpdateUser={handleUpdateUser}
+      />
+      <EditAvatarPopup
+        isLoading={isLoadingText}
+        isOpen={isEditAvatarPopupOpen}
+        onClose={closeAllPopups}
+        onUpdateAvatar={handleUpdateAvatar}
+      />
+      <AddPlacePopup
+        isLoading={isLoadingText}
+        isOpen={isAddPlacePopupOpen}
+        onClose={closeAllPopups}
+        onAddPlace={handleAddPlaceSubmit}
+      />
+      <DeleteConfirmPopup
+        isLoading={isLoadingText}
+        card={selectedCard}
+        onClose={closeAllPopups}
+        isOpen={isDeleteCardPopupOpen}
+        onDelete={handleDeleteClick}
+      />
+      <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} />
+      <InfoTooltip
+        isOpen={isInfoTooltipOpen}
+        onClose={closeAllPopups}
+        isCorrectLogin={isRegistration}
+      />
+    </CurrentUserContext.Provider>
   );
 }
 
