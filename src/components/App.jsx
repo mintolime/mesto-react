@@ -199,7 +199,7 @@ function App() {
       console.log(jwt);
       // проверим токен
       auth
-        .getContent(jwt)
+        .checkToken(jwt)
         .then((res) => {
           console.log('work');
           if (res) {
