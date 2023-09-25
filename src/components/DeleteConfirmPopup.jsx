@@ -1,10 +1,10 @@
-import React from 'react';
-import PopupWithForm from './PopupWithForm';
+import React from 'react'
+import PopupWithForm from './PopupWithForm'
 
 function DeleteConfirmPopup({ card, isOpen, onClose, onDelete, isLoading }) {
   function handleDelete(evt) {
-    evt.preventDefault();
-    onDelete(card);
+    evt.preventDefault()
+    onDelete(card)
   }
 
   return (
@@ -18,7 +18,7 @@ function DeleteConfirmPopup({ card, isOpen, onClose, onDelete, isLoading }) {
       //передаем булево значение для активации кнопки сабмита
       isValid={true}
       btnText="Да"
-      ></PopupWithForm>
-  );
+    ></PopupWithForm>
+  )
 }
-export default DeleteConfirmPopup;
+export default DeleteConfirmPopup

@@ -1,8 +1,8 @@
 const handleResponce = (res) => {
   if (res.ok) {
-    return res.json();
+    return res.json()
   }
-  return Promise.reject(res.status);
-};
+  return Promise.reject(res.status)
+}
 
-export default handleResponce;
+export default handleResponce

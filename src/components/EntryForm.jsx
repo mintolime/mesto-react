@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 //поправить название
 function EntryForm({ title, children, btnText, linkText, onSubmit }) {
@@ -7,7 +7,7 @@ function EntryForm({ title, children, btnText, linkText, onSubmit }) {
     <section className="login" aria-label={title}>
       <div className="login__container">
         <h3 className="login__title">{title}</h3>
-        <form name="form" className="form" onSubmit={onSubmit} >
+        <form name="form" className="form" onSubmit={onSubmit}>
           {children}
           <button className="button button_type_entry" type="submit">
             {btnText}
@@ -18,6 +18,6 @@ function EntryForm({ title, children, btnText, linkText, onSubmit }) {
         {linkText}
       </Link>
     </section>
-  );
+  )
 }
-export default EntryForm;
+export default EntryForm

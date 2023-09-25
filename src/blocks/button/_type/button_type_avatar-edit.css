@@ -7,10 +7,10 @@
   opacity: 0;
   background-repeat: no-repeat;
   background-position: center;
-  transition: .9s ease;
+  transition: 0.9s ease;
 }
 
 .button_type_avatar-edit:hover {
-  opacity: .8;
+  opacity: 0.8;
   background-color: #000;
 }

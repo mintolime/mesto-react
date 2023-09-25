@@ -1,24 +1,24 @@
-import React from 'react';
-import { CurrentUserContext } from '../context/CurrentUserContext';
-import PopupWithForm from './PopupWithForm';
-import useFormAndValidation from '../hooks/useFormAndValidation';
+import React from 'react'
+import { CurrentUserContext } from '../context/CurrentUserContext'
+import PopupWithForm from './PopupWithForm'
+import useFormAndValidation from '../hooks/useFormAndValidation'
 
 const AddPlacePopup = ({ isOpen, onClose, onAddPlace, isLoading }) => {
-  const currentUser = React.useContext(CurrentUserContext);
-  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+  const currentUser = React.useContext(CurrentUserContext)
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation()
 
   React.useEffect(() => {
-    currentUser ? resetForm(currentUser) : resetForm();
-  }, [resetForm, currentUser, isOpen]);
+    currentUser ? resetForm(currentUser) : resetForm()
+  }, [resetForm, currentUser, isOpen])
 
   function handleSubmit(e) {
-    e.preventDefault();
+    e.preventDefault()
     onAddPlace({
       name: values.cardName,
       link: values.cardLink,
-    });
+    })
   }
-  
+
   return (
     <PopupWithForm
       isOpen={isOpen}
@@ -28,7 +28,8 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace, isLoading }) => {
       title="Новое место"
       onSubmit={handleSubmit}
       name="add-card"
-      isValid={isValid}>
+      isValid={isValid}
+    >
       <fieldset className="form__inner">
         <input
           className="form__input  form__input_text_name"
@@ -58,6 +59,6 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace, isLoading }) => {
         <span className="form__input-error input-link-error">{errors.cardLink}</span>
       </fieldset>
     </PopupWithForm>
-  );
-};
-export default AddPlacePopup;
+  )
+}
+export default AddPlacePopup

@@ -7,9 +7,9 @@
   aspect-ratio: 1 / 1;
   border-radius: 10px 10px 0 0;
 }
-.cards__image:hover{
+.cards__image:hover {
   border-radius: 15px;
-  cursor:pointer;
+  cursor: pointer;
   transform: scale(0.98);
   transition: transform 0.3s;
 }

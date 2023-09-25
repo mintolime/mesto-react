@@ -1,9 +1,9 @@
-import logo from '../images/header-logo.svg';
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import logo from '../images/header-logo.svg'
+import { Link } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 function Header({ isCorrectLogin, onLogout, userEmail }) {
-  const location = useLocation();
+  const location = useLocation()
 
   return (
     <header className="header">
@@ -30,7 +30,7 @@ function Header({ isCorrectLogin, onLogout, userEmail }) {
         ''
       )}
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header

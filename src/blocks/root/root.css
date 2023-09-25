@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 920px;
   /* при решении сделать отступы бэм-миксом, понадобилась доп.ширина., т.к блок cards встает в 2 колонки*/
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

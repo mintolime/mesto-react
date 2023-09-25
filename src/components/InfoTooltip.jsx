@@ -1,12 +1,12 @@
-import successIcon from '../images/icon/icon-success-login.png';
-import errorIcon from '../images/icon/icon-error-login.png';
+import successIcon from '../images/icon/icon-success-login.png'
+import errorIcon from '../images/icon/icon-error-login.png'
 
 function InfoTooltip({ isOpen, onClose, isCorrectLogin }) {
-
   return (
     <section
       className={`popup  ${isOpen ? 'popup_opened' : ''}`}
-      aria-label="Уведомление при регистрации в приложение">
+      aria-label="Уведомление при регистрации в приложение"
+    >
       <div className="popup__container popup__container_login">
         <button type="button" className=" button button_type_close" onClick={onClose}></button>
         <img
@@ -21,7 +21,7 @@ function InfoTooltip({ isOpen, onClose, isCorrectLogin }) {
         </h3>
       </div>
     </section>
-  );
+  )
 }
 
-export default InfoTooltip;
+export default InfoTooltip

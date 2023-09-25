@@ -2,7 +2,6 @@
   background: url('../../../images/icon/icon-add.png') no-repeat center;
   border: 2px solid #ffffff;
   padding: 20px 138px;
-
 }
 
 @media screen and (min-width: 720px) {
@@ -15,5 +14,5 @@
   }
 }
 .button_type_add:hover {
-  opacity: .6;
+  opacity: 0.6;
 }

@@ -1,20 +1,21 @@
-import EntryForm from './EntryForm';
-import useFormAndValidation from '../hooks/useFormAndValidation';
+import EntryForm from './EntryForm'
+import useFormAndValidation from '../hooks/useFormAndValidation'
 
 function Register({ onRegister }) {
-  const { values, handleChange, errors } = useFormAndValidation();
-  
+  const { values, handleChange, errors } = useFormAndValidation()
+
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
-    evt.preventDefault();
-    onRegister(values);
+    evt.preventDefault()
+    onRegister(values)
   }
   return (
     <EntryForm
       title="Регистрация"
       btnText="Зарегистрироваться"
       linkText="Уже зарегистрированы? Войти"
-      onSubmit={handleSubmit}>
+      onSubmit={handleSubmit}
+    >
       <fieldset className="form__inner form__inner_login">
         <input
           className="form__input form__input_login"
@@ -44,6 +45,6 @@ function Register({ onRegister }) {
         <span className="form__input-error"> {errors.password}</span>
       </fieldset>
     </EntryForm>
-  );
+  )
 }
-export default Register;
+export default Register

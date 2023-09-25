@@ -1,28 +1,28 @@
-import React from 'react';
+import React from 'react'
 
-import { CurrentUserContext } from '../context/CurrentUserContext';
-import useFormAndValidation from '../hooks/useFormAndValidation';
-import PopupWithForm from './PopupWithForm';
+import { CurrentUserContext } from '../context/CurrentUserContext'
+import useFormAndValidation from '../hooks/useFormAndValidation'
+import PopupWithForm from './PopupWithForm'
 
 function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = React.useContext(CurrentUserContext)
 
-  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation()
   // После загрузки текущего пользователя из API
   // его данные будут использованы в управляемых компонентах.
   React.useEffect(() => {
-    currentUser ? resetForm(currentUser) : resetForm();
-  }, [resetForm, currentUser, isOpen]);
+    currentUser ? resetForm(currentUser) : resetForm()
+  }, [resetForm, currentUser, isOpen])
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
-    evt.preventDefault();
+    evt.preventDefault()
 
     // Передаём значения управляемых компонентов во внешний обработчик
     onUpdateUser({
       name: values.name,
       about: values.about,
-    });
+    })
   }
 
   return (
@@ -67,6 +67,6 @@ function EditProfilePopup({ isOpen, onClose, onUpdateUser, isLoading }) {
         <span className="form__input-error input-about-error">{errors.about}</span>
       </fieldset>
     </PopupWithForm>
-  );
+  )
 }
-export default EditProfilePopup;
+export default EditProfilePopup

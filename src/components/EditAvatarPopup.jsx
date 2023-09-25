@@ -1,24 +1,24 @@
-import React from 'react';
-import { CurrentUserContext } from '../context/CurrentUserContext';
-import PopupWithForm from './PopupWithForm';
-import useFormAndValidation from '../hooks/useFormAndValidation';
+import React from 'react'
+import { CurrentUserContext } from '../context/CurrentUserContext'
+import PopupWithForm from './PopupWithForm'
+import useFormAndValidation from '../hooks/useFormAndValidation'
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
-  const currentUser = React.useContext(CurrentUserContext);
+  const currentUser = React.useContext(CurrentUserContext)
 
-  const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation();
+  const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation()
 
   function handleSubmit(evt) {
-    evt.preventDefault();
+    evt.preventDefault()
 
     onUpdateAvatar({
       avatar: values.avatarLink,
-    });
+    })
   }
 
   React.useEffect(() => {
-    currentUser ? resetForm(currentUser) : resetForm();
-  }, [resetForm, currentUser, isOpen]);
+    currentUser ? resetForm(currentUser) : resetForm()
+  }, [resetForm, currentUser, isOpen])
 
   return (
     <PopupWithForm
@@ -29,7 +29,8 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
       onSubmit={handleSubmit}
       title="Обновить аватар"
       name="avatar"
-      btnText="Сохранить">
+      btnText="Сохранить"
+    >
       <fieldset className="form__inner">
         <input
           className="form__input"
@@ -45,6 +46,6 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
         <span className="form__input-error input-avatar-error">{errors.avatarLink}</span>
       </fieldset>
     </PopupWithForm>
-  );
+  )
 }
-export default EditAvatarPopup;
+export default EditAvatarPopup

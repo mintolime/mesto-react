@@ -7,8 +7,8 @@
   grid-template-columns: 1fr auto;
   align-items: center;
   grid-template-areas:
-    "name edit-button"
-    "info info";
+    'name edit-button'
+    'info info';
 }
 
 @media screen and (min-width: 720px) {

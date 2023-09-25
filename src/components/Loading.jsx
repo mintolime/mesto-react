@@ -16,7 +16,7 @@ function Loading({ error }) {
         </>
       )}
     </div>
-  );
+  )
 }
 
-export default Loading;
+export default Loading

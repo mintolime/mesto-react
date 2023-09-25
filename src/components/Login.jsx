@@ -1,16 +1,16 @@
-import EntryForm from './EntryForm';
-import useFormAndValidation from '../hooks/useFormAndValidation';
+import EntryForm from './EntryForm'
+import useFormAndValidation from '../hooks/useFormAndValidation'
 
 function Login({ onAuthorization }) {
-  const { values, handleChange, errors } = useFormAndValidation();
+  const { values, handleChange, errors } = useFormAndValidation()
 
   function handleSubmit(evt) {
     // Запрещаем браузеру переходить по адресу формы
-    evt.preventDefault();
+    evt.preventDefault()
     if (!values.email || !values.password) {
-      return;
+      return
     }
-    onAuthorization(values);
+    onAuthorization(values)
   }
   return (
     <EntryForm title="Вход" btnText="Войти" onSubmit={handleSubmit}>
@@ -43,6 +43,6 @@ function Login({ onAuthorization }) {
         <span className="form__input-error"> {errors.password}</span>
       </fieldset>
     </EntryForm>
-  );
+  )
 }
-export default Login;
+export default Login
