@@ -1,4 +1,6 @@
-function PageNotFound() {
+import React from 'react'
+
+const PageNotFound: React.FC = () => {
   return (
     <div className="neonText">
       <p className="neonText__title">404</p>

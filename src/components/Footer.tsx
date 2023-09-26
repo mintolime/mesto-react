@@ -1,4 +1,6 @@
-function Footer() {
+import React from "react"
+
+const Footer: React.FC = () => {
   return (
     <footer className="footer root__container">
       <p className="footer__copyright">

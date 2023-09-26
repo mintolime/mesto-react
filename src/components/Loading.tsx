@@ -1,5 +1,10 @@
-//посмотреть стили , чтобы футер не прыгал наверх
-function Loading({ error }) {
+import React from 'react';
+
+interface MyComponentProps {
+  error: string;
+}
+
+const Loading: React.FC<MyComponentProps> = ({ error }) => {
   return (
     <div className="loading">
       {error ? (
@@ -19,4 +24,4 @@ function Loading({ error }) {
   )
 }
 
-export default Loading
+export default Loading;
