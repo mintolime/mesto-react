@@ -1,7 +1,7 @@
-import React from 'react';
+import React from 'react'
 
 interface MyComponentProps {
-  error: string;
+  error: string
 }
 
 const Loading: React.FC<MyComponentProps> = ({ error }) => {
@@ -24,4 +24,4 @@ const Loading: React.FC<MyComponentProps> = ({ error }) => {
   )
 }
 
-export default Loading;
+export default Loading
